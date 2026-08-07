@@ -1,0 +1,63 @@
+name: Autoderm – AI Dermatology API
+description: >-
+  Autoderm is a white-label REST API for AI-powered skin-image analysis. It accepts an image via HTTP POST and returns
+  ranked skin-condition predictions with ICD-10 codes, medical and layman's names, and links, covering 70+ conditions.
+  CE-marked and built for telemedicine, pharmacy, and digital health platforms.
+url: https://autoderm-ai-dermatology-api.apievangelist.com/apis.yml
+created: '2026-08-07'
+modified: '2026-08-07'
+specificationVersion: '0.21'
+tags:
+  - dermatology-api
+  - ai-dermatology
+  - medical-imaging
+  - telemedicine
+  - skin-analysis
+  - rest-api
+  - openapi
+  - llms-txt
+  - ce-marked
+  - white-label
+  - healthcare
+  - medical-ai
+  - computer-vision
+apis:
+  - name: Autoderm AI Dermatology API
+    description: >-
+      REST API for AI dermatology: POST a skin image and receive ranked condition predictions in JSON with ICD-10 codes,
+      medical/layman names, and read-more links. Authenticated via an Api-Key header.
+    humanURL: https://docs.autoderm.ai/en
+    baseURL: https://autoderm.ai/v1/query
+    tags:
+      - dermatology-api
+      - ai-dermatology
+      - medical-imaging
+      - telemedicine
+      - skin-analysis
+      - rest-api
+      - openapi
+      - llms-txt
+      - ce-marked
+      - white-label
+      - healthcare
+      - medical-ai
+      - computer-vision
+    properties:
+      - type: Documentation
+        url: https://docs.autoderm.ai/en
+      - type: Documentation
+        url: https://autoderm.ai/docs/quickstart.html
+      - type: OpenAPI
+        url: https://docs.autoderm.ai/en/openapi-spec
+      - type: OpenAPI
+        url: https://docs.autoderm.ai/en/swagger-ui
+      - type: LLMSTxt
+        url: https://autoderm.ai/llms.txt
+maintainers:
+  - FN: Alexander Börve
+    url: https://autoderm.ai/
+generated:
+  by: apis.io/add
+  model: claude-opus-4-8
+  confidence: 90
+  at: '2026-08-07T07:19:02.528Z'
