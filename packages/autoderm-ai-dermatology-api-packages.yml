@@ -1,0 +1,62 @@
+generated: '2026-08-09'
+method: searched
+source: >-
+  https://pypi.org/pypi/autoderm/json and
+  https://api.github.com/orgs/autodermai/repos — probed 2026-08-09
+description: >-
+  First-party client libraries published by Autoderm. Autoderm ships exactly one
+  official SDK, a Python client on PyPI mirrored from the autodermai GitHub
+  organization. The current documentation states plainly that "No SDK is
+  required. The API is language-agnostic and can be used with any standard HTTP
+  client", and the published SDK still targets the LEGACY autoderm.ai/v1 surface
+  (last released 2024-05-31, before the api.autoderm.ai platform migration), so
+  it is recorded here as official but stale relative to the current API.
+packages:
+  - language: python
+    registry: pypi
+    name: autoderm
+    version: 0.0.5
+    url: https://pypi.org/project/autoderm/
+    install: pip install autoderm
+    source: https://github.com/autodermai/autoderm_sdk
+    official: true
+    maintainer_email: lucas@autoderm.ai
+    requires_python: '>=3.9,<4.0'
+    released: '2024-05-31'
+    summary: Autoderm's Official SDK Client.
+    note: >-
+      Targets the legacy API surface (https://autoderm.ai/v1). The current
+      platform is https://api.autoderm.ai with Bearer-token auth; see
+      lifecycle/ and the migration doc at
+      https://docs.autoderm.ai/en/disease-detection-api/migrating-from-legacy-api
+registries_probed:
+  - registry: pypi
+    query: autoderm
+    result: 1 official package
+  - registry: npm
+    query: autoderm
+    result: 0 packages (registry.npmjs.org/-/v1/search returned total=0)
+  - registry: npm
+    query: autoderm (exact)
+    result: 404 Not found
+  - registry: maven-central
+    result: none found
+  - registry: nuget
+    result: none found
+  - registry: rubygems
+    result: none found
+  - registry: packagist
+    result: none found
+  - registry: crates.io
+    result: none found
+  - registry: pkg.go.dev
+    result: none found
+github_organization:
+  url: https://github.com/autodermai
+  name: Autoderm AI
+  public_repos: 1
+  repos:
+    - name: autoderm_sdk
+      url: https://github.com/autodermai/autoderm_sdk
+      language: Python
+      description: Autoderm's Official SDK

@@ -1,11 +1,20 @@
 name: Autoderm – AI Dermatology API
 description: >-
-  Autoderm is a white-label REST API for AI-powered skin-image analysis. It accepts an image via HTTP POST and returns
-  ranked skin-condition predictions with ICD-10 codes, medical and layman's names, and links, covering 70+ conditions.
-  CE-marked and built for telemedicine, pharmacy, and digital health platforms.
+  Autoderm is a white-label REST API for AI-assisted analysis of dermatological images, operated as a
+  regulated medical device. A client POSTs a single skin photograph as multipart/form-data and receives
+  the top five most probable conditions, each with a confidence score between 0 and 1, an ICD-10 code
+  and an English name; a companion static catalog maps every ICD-10 code to localized and layman's
+  names plus read-more links in seven languages. Alongside disease detection the API exposes Fitzpatrick
+  skin-type classification, a blur/image-quality screen, a genitalia content-safety classifier, an age
+  estimator, and — unusually — the regulatory device label itself as a live anonymous endpoint.
+  Autoderm is CE-marked under EU MDD 93/42/EEC as a legacy Class I device, is transitioning to MDR
+  Class IIa under EU MDR 2017/745, and holds FDA Breakthrough Device Designation. It is sold into
+  telemedicine, pharmacy, and digital health platforms as a decision-support and triage tool, and is
+  explicitly not intended as a means of diagnosis.
 url: https://autoderm-ai-dermatology-api.apievangelist.com/apis.yml
+image: https://autoderm.ai/wp-content/uploads/2026/05/autoderm-logo.svg
 created: '2026-08-07'
-modified: '2026-08-07'
+modified: '2026-08-09'
 specificationVersion: '0.21'
 tags:
   - dermatology-api
@@ -21,13 +30,23 @@ tags:
   - healthcare
   - medical-ai
   - computer-vision
+  - medical-device
+  - icd-10
+  - image-classification
+  - clinical-decision-support
+  - triage
 apis:
   - name: Autoderm AI Dermatology API
     description: >-
-      REST API for AI dermatology: POST a skin image and receive ranked condition predictions in JSON with ICD-10 codes,
-      medical/layman names, and read-more links. Authenticated via an Api-Key header.
+      REST API for AI dermatology inference. POST a skin image as multipart/form-data to
+      https://api.autoderm.ai and receive ranked condition predictions in JSON with ICD-10 codes,
+      confidence scores and English names, optionally with a Fitzpatrick skin-type classification.
+      Also exposes a static localized disease catalog, blur detection, a content-safety classifier,
+      age estimation, health/version endpoints, and the regulatory medical-device label. Authenticated
+      with an HTTP Bearer token issued from the Autoderm dashboard; the legacy Api-Key header scheme is
+      no longer accepted.
     humanURL: https://docs.autoderm.ai/en
-    baseURL: https://autoderm.ai/v1/query
+    baseURL: https://api.autoderm.ai
     tags:
       - dermatology-api
       - ai-dermatology
@@ -36,28 +55,104 @@ apis:
       - skin-analysis
       - rest-api
       - openapi
-      - llms-txt
       - ce-marked
       - white-label
       - healthcare
       - medical-ai
       - computer-vision
+      - medical-device
+      - icd-10
     properties:
+      - type: OpenAPI
+        url: openapi/autoderm-ai-dermatology-api-openapi.yml
+      - type: OpenAPI Source
+        url: https://api.autoderm.ai/openapi.json
       - type: Documentation
         url: https://docs.autoderm.ai/en
-      - type: Documentation
-        url: https://autoderm.ai/docs/quickstart.html
-      - type: OpenAPI
-        url: https://docs.autoderm.ai/en/openapi-spec
-      - type: OpenAPI
-        url: https://docs.autoderm.ai/en/swagger-ui
+      - type: APIReference
+        url: https://docs.autoderm.ai/en/api-reference
+      - type: GettingStarted
+        url: https://docs.autoderm.ai/en/getting-started/getting-started
       - type: LLMSTxt
         url: https://autoderm.ai/llms.txt
 maintainers:
   - FN: Alexander Börve
     url: https://autoderm.ai/
+    email: support@autoderm.ai
 generated:
   by: apis.io/add
   model: claude-opus-4-8
   confidence: 90
   at: '2026-08-07T07:19:02.528Z'
+common:
+- type: Website
+  url: https://autoderm.ai/
+- type: DeveloperPortal
+  url: https://app.autoderm.ai
+- type: Documentation
+  url: https://docs.autoderm.ai/en
+- type: APIReference
+  url: https://docs.autoderm.ai/en/api-reference
+- type: GettingStarted
+  url: https://docs.autoderm.ai/en/getting-started/getting-started
+- type: Support
+  url: https://docs.autoderm.ai/en/support/support-contact
+- type: Blog
+  url: https://autoderm.ai/blog/
+- type: GitHubOrganization
+  url: https://github.com/autodermai
+- type: Pricing
+  url: https://autoderm.ai/pricing/
+- type: SignUp
+  url: https://app.autoderm.ai/en/auth/sign-up
+- type: Login
+  url: https://app.autoderm.ai/en/auth/login
+- type: TermsOfService
+  url: https://autoderm.ai/terms-of-service-autoderm/
+- type: PrivacyPolicy
+  url: https://autoderm.ai/privacy-policy/
+- type: Compliance
+  url: https://autoderm.ai/regulatory/
+- type: Deprecation
+  url: https://docs.autoderm.ai/en/support/api-versioning
+- type: Versioning
+  url: https://docs.autoderm.ai/en/support/api-versioning
+- type: Authentication
+  url: authentication/autoderm-ai-dermatology-api-authentication.yml
+- type: Conventions
+  url: conventions/autoderm-ai-dermatology-api-conventions.yml
+- type: ErrorCatalog
+  url: errors/autoderm-ai-dermatology-api-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/autoderm-ai-dermatology-api-lifecycle.yml
+- type: Conformance
+  url: conformance/autoderm-ai-dermatology-api-conformance.yml
+- type: DataModel
+  url: data-model/autoderm-ai-dermatology-api-data-model.yml
+- type: RateLimits
+  url: rate-limits/autoderm-ai-dermatology-api-rate-limits.yml
+- type: Plans
+  url: plans/autoderm-ai-dermatology-api-plans.yml
+- type: Packages
+  url: packages/autoderm-ai-dermatology-api-packages.yml
+- type: SDKs
+  url: packages/autoderm-ai-dermatology-api-packages.yml
+- type: Examples
+  url: examples/_index.yml
+- type: JSONSchema
+  url: json-schema/
+- type: Overlay
+  url: overlays/autoderm-ai-dermatology-api-openapi-overlay.yaml
+- type: LLMsTxt
+  url: llms/autoderm-ai-dermatology-api-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/autoderm-ai-dermatology-api-agentic-access.yml
+- type: DomainSecurity
+  url: security/autoderm-ai-dermatology-api-domain-security.yml
+x-enrichment:
+  date: '2026-08-09'
+  status: enriched
+  artifacts_added: 45
+  pass: local-v1

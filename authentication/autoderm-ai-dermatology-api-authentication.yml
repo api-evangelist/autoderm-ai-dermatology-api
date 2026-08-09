@@ -1,0 +1,104 @@
+generated: '2026-08-09'
+method: searched
+source: openapi/autoderm-ai-dermatology-api-openapi.yml
+docs: https://docs.autoderm.ai/en/getting-started/getting-started
+description: >-
+  Autoderm uses a single authentication mechanism: an HTTP Bearer token in the
+  Authorization header, issued per organization from the Autoderm web
+  application. There is no OAuth 2.0 authorization server, no OpenID Connect
+  discovery document, and therefore no scope surface — see the
+  no_oauth_surface block below. The legacy platform used a different scheme
+  (an Api-Key header against autoderm.ai/v1) which the current platform does
+  not accept.
+summary:
+  types:
+    - http
+  http_schemes:
+    - bearer
+  api_key_in: []
+  oauth2_flows: []
+schemes:
+  - name: HTTPBearer
+    type: http
+    scheme: bearer
+    header: Authorization
+    format: 'Authorization: Bearer YOUR_API_TOKEN'
+    sources:
+      - openapi/autoderm-ai-dermatology-api-openapi.yml
+    applied_to:
+      - detect_blur_v1_utils_detect_blur_post
+      - infer_genitals_v1_v1_infer_genitals_v1_post
+      - infer_diseases_v1_v1_infer_diseases_v1_post
+      - get_disease_catalog_v1_v1_infer_diseases_v1_diseases_get
+      - infer_skin_tone_v1_v1_infer_skin_tone_v1_post
+unauthenticated_operations:
+  description: >-
+    Operations the spec declares with no security requirement. Verified live:
+    GET https://api.autoderm.ai/v1/label and /health and /version all return 200
+    anonymously.
+  operations:
+    - get_health_healthz_get
+    - get_health_healthz_head
+    - get_health_health_get
+    - get_health_health_head
+    - get_version_version_get
+    - get_health_v1_system_healthz_get
+    - get_health_v1_system_healthz_head
+    - get_health_v1_system_health_get
+    - get_health_v1_system_health_head
+    - get_version_v1_system_version_get
+    - get_label_v1_label_get
+  spec_gap:
+    - operation: infer_age_v1_v1_infer_age_v1_post
+      note: >-
+        Declared with NO security requirement in the published OpenAPI while
+        every sibling inference operation requires HTTPBearer. Recorded as an
+        observed spec inconsistency, not as a claim that the endpoint is open —
+        it was not called, because calling an inference endpoint anonymously
+        would be probing for an auth bypass.
+credential_issuance:
+  console: https://app.autoderm.ai
+  sign_up: https://app.autoderm.ai/en/auth/sign-up
+  login: https://app.autoderm.ai/en/auth/login
+  key_management: >-
+    API key management from the Autoderm dashboard; the Basic plan advertises
+    "unlimited API keys with role-based access".
+  rotation: >-
+    Docs place responsibility for rotation on the client: "The API client is
+    responsible for preventing unauthorized access and for rotating keys if
+    compromise is suspected."
+handling_rules:
+  quoted_from_docs:
+    - API access tokens are confidential credentials and must be kept secret at all times.
+    - Be stored securely
+    - Never be embedded in client-side code
+    - Never be exposed in public repositories, logs, or user interfaces
+  server_to_server_only: >-
+    "API keys are intended for server-to-server communication only."
+no_oauth_surface:
+  oauth2: false
+  openid_connect: false
+  scopes: false
+  evidence:
+    - https://api.autoderm.ai/.well-known/openid-configuration returned 404
+    - https://api.autoderm.ai/.well-known/oauth-authorization-server returned 404
+    - OpenAPI components.securitySchemes declares only HTTPBearer (type http)
+  note: >-
+    scopes/ is deliberately NOT emitted for this provider — a bearer-token API
+    with no authorization server has no scope surface to capture.
+failure_behavior:
+  status: 401
+  content_type: application/json
+  body: '{"detail":"Missing Authorization header"}'
+  observed: '2026-08-09 — GET https://api.autoderm.ai/v1/infer-diseases/v1/diseases with no Authorization header'
+  note: >-
+    The 401 is NOT documented in the OpenAPI; the spec declares only 200 and
+    422 on secured operations. See errors/ for the full catalog.
+legacy:
+  platform: https://legacy.autoderm.ai
+  base_url: https://autoderm.ai/v1
+  scheme: Api-Key header
+  status: >-
+    Not supported on the new platform. Docs: "Legacy authentication mechanisms
+    are not supported on the new platform."
+  docs: https://docs.autoderm.ai/en/disease-detection-api/migrating-from-legacy-api

@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "predictions": {
+      "items": {
+        "$ref": "DiseasePrediction.json"
+      },
+      "type": "array",
+      "title": "Predictions",
+      "description": "List of disease predictions"
+    },
+    "skin_tone": {
+      "anyOf": [
+        {
+          "$ref": "SkinToneModelResponse.json"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Fitzpatrick skin type classification"
+    }
+  },
+  "type": "object",
+  "required": [
+    "predictions"
+  ],
+  "title": "DiseaseModelResponse",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.autoderm.ai/schemas/DiseaseModelResponse.json"
+}

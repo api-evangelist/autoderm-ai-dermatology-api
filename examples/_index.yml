@@ -1,0 +1,58 @@
+generated: '2026-08-09'
+method: probed
+source: live requests against https://api.autoderm.ai on 2026-08-09
+description: >-
+  Real, unedited response bodies captured from the live Autoderm API. Only the
+  anonymous endpoints could be exercised — every inference endpoint requires a
+  Bearer token, and no request was made with credentials we do not hold. The
+  401 below is a genuine observed error response, not a constructed one.
+examples:
+  - file: autoderm-ai-dermatology-api-get-label-200.json
+    operation: get_label_v1_label_get
+    request: GET https://api.autoderm.ai/v1/label
+    status: 200
+    auth: none
+    schema: MedicalDeviceLabel
+    note: >-
+      The regulatory device label served as a live API resource — CE mark
+      class, UDI, manufacturer, eIFU notice and UK responsible person.
+  - file: autoderm-ai-dermatology-api-get-version-200.json
+    operation: get_version_version_get
+    request: GET https://api.autoderm.ai/version
+    status: 200
+    auth: none
+    schema: Version
+  - file: autoderm-ai-dermatology-api-get-health-200.json
+    operation: get_health_health_get
+    request: GET https://api.autoderm.ai/health
+    status: 200
+    auth: none
+    note: >-
+      Returns {"status":"ok"}. The OpenAPI declares the 200 response schema as
+      an untyped object, so the actual field name is only discoverable by
+      calling it.
+  - file: autoderm-ai-dermatology-api-get-disease-catalog-401.json
+    operation: get_disease_catalog_v1_v1_infer_diseases_v1_diseases_get
+    request: GET https://api.autoderm.ai/v1/infer-diseases/v1/diseases
+    status: 401
+    auth: none (deliberately omitted)
+    note: >-
+      The 401 shape is NOT declared anywhere in the published OpenAPI. This
+      capture is the only machine-readable record of it. Note that "detail"
+      here is a STRING, whereas on the documented 422 it is an ARRAY of
+      ValidationError objects.
+not_captured:
+  reason: requires a Bearer token and consumes metered detections
+  operations:
+    - infer_diseases_v1_v1_infer_diseases_v1_post
+    - infer_skin_tone_v1_v1_infer_skin_tone_v1_post
+    - infer_genitals_v1_v1_infer_genitals_v1_post
+    - infer_age_v1_v1_infer_age_v1_post
+    - detect_blur_v1_utils_detect_blur_post
+    - get_disease_catalog_v1_v1_infer_diseases_v1_diseases_get
+  note: >-
+    Autoderm publishes no example request or response payloads for any
+    inference endpoint — the OpenAPI carries schemas but zero examples, and the
+    documentation pages contain no sample curl, no sample JSON, and no sample
+    prediction. That is a real documentation gap, recorded rather than filled:
+    we will not invent a specimen prediction for a medical device.

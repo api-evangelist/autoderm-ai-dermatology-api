@@ -1,0 +1,93 @@
+generated: '2026-08-09'
+method: derived
+source: >-
+  openapi/autoderm-ai-dermatology-api-openapi.yml (4xx/5xx responses) plus live
+  error responses observed against https://api.autoderm.ai on 2026-08-09.
+format: fastapi-detail
+rfc9457: false
+description: >-
+  Autoderm returns JSON errors under a single "detail" key. It is NOT RFC 9457
+  problem+json: there is no type URI, no title, no instance, and the media type
+  is application/json rather than application/problem+json. Two different
+  shapes share the "detail" key — an array of validation objects on 422, and a
+  plain string on 401 — so a client cannot parse "detail" without first
+  branching on its JSON type. Autoderm publishes no error-code reference page,
+  so the catalog below is derived from the spec and from responses actually
+  observed; it is not a claim of completeness.
+envelope:
+  field: detail
+  content_type: application/json
+  shapes:
+    - status: 422
+      detail_type: array
+      item_schema: ValidationError
+    - status: 401
+      detail_type: string
+correlation_header: x-request-id
+problems:
+  - status: 401
+    title: Missing Authorization header
+    detail: Missing Authorization header
+    method: probed
+    observed: '2026-08-09'
+    observed_at: GET https://api.autoderm.ai/v1/infer-diseases/v1/diseases
+    body: '{"detail":"Missing Authorization header"}'
+    documented_in_spec: false
+    remediation: >-
+      Send an Authorization header of the form "Bearer YOUR_API_TOKEN". Tokens
+      are issued from https://app.autoderm.ai.
+    applies_to:
+      - detect_blur_v1_utils_detect_blur_post
+      - infer_genitals_v1_v1_infer_genitals_v1_post
+      - infer_diseases_v1_v1_infer_diseases_v1_post
+      - get_disease_catalog_v1_v1_infer_diseases_v1_diseases_get
+      - infer_skin_tone_v1_v1_infer_skin_tone_v1_post
+  - status: 422
+    title: Validation Error
+    schema: HTTPValidationError
+    method: derived
+    documented_in_spec: true
+    detail_schema: ValidationError
+    detail_fields:
+      loc: array — location path of the offending input
+      msg: string — human-readable message
+      type: string — machine-readable error type
+      input: any — the value that failed validation
+      ctx: object — additional context
+    likely_causes:
+      - Image missing from the multipart/form-data body (the image field is required).
+      - Image below the 224x224 minimum resolution.
+      - Image above the maximum file size (see conventions/ — docs say 5 MB, spec says 10 MB).
+      - Unsupported image format.
+      - >-
+        require_anonymous=true and the anonymity check rejected the image
+        because identifiable features were present.
+    remediation: >-
+      Inspect detail[].loc to find the offending field and detail[].msg for the
+      reason. Consider calling POST /v1/utils/detect-blur first to screen image
+      quality before spending a metered inference call.
+    applies_to:
+      - detect_blur_v1_utils_detect_blur_post
+      - infer_genitals_v1_v1_infer_genitals_v1_post
+      - infer_age_v1_v1_infer_age_v1_post
+      - infer_diseases_v1_v1_infer_diseases_v1_post
+      - infer_skin_tone_v1_v1_infer_skin_tone_v1_post
+undocumented_but_referenced:
+  description: >-
+    Status classes the Service Level Agreement treats as meaningful without the
+    API reference ever cataloging them.
+  source: https://docs.autoderm.ai/en/support/service-level-agreement
+  entries:
+    - status: 404
+      note: >-
+        The SLA defines API Downtime as periods where the API "has consistently
+        returned errors (HTTP status codes 404 or 5XX) despite being provided
+        with valid inputs" — so 404 is an outage signal, not an ordinary
+        client error, on this API.
+    - status: 5XX
+      note: Counts toward Unscheduled Downtime under the SLA uptime commitment.
+gaps:
+  - No published error-code reference page.
+  - No 401/403/404/429/5xx responses declared in the OpenAPI (only 200 and 422).
+  - No rate-limit / quota-exhaustion error documented despite metered billing.
+  - Not RFC 9457; no stable machine-readable error type identifiers.

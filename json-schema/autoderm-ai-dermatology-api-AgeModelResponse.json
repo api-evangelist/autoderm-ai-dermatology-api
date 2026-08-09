@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "age": {
+      "type": "number",
+      "minimum": 0.0,
+      "title": "Age",
+      "description": "Predicted age of the subject in years"
+    }
+  },
+  "type": "object",
+  "required": [
+    "age"
+  ],
+  "title": "AgeModelResponse",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.autoderm.ai/schemas/AgeModelResponse.json"
+}

@@ -1,0 +1,39 @@
+{
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Name"
+    },
+    "simple_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Simple Name"
+    },
+    "read_more_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Read More Url"
+    }
+  },
+  "type": "object",
+  "required": [
+    "name",
+    "simple_name",
+    "read_more_url"
+  ],
+  "title": "DiseaseCatalogLocalizedEntry",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.autoderm.ai/schemas/DiseaseCatalogLocalizedEntry.json"
+}

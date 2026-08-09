@@ -1,0 +1,20 @@
+{
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Name"
+    },
+    "version": {
+      "type": "string",
+      "title": "Version"
+    }
+  },
+  "type": "object",
+  "required": [
+    "name",
+    "version"
+  ],
+  "title": "Version",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.autoderm.ai/schemas/Version.json"
+}

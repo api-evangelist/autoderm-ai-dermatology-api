@@ -1,0 +1,24 @@
+{
+  "properties": {
+    "prediction": {
+      "type": "boolean",
+      "title": "Prediction",
+      "description": "Model prediction"
+    },
+    "confidence": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence",
+      "description": "Prediction confidence score"
+    }
+  },
+  "type": "object",
+  "required": [
+    "prediction",
+    "confidence"
+  ],
+  "title": "BooleanAnalysis",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.autoderm.ai/schemas/BooleanAnalysis.json"
+}

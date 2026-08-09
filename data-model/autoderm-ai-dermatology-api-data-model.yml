@@ -1,0 +1,157 @@
+generated: '2026-08-09'
+method: derived
+source: openapi/autoderm-ai-dermatology-api-openapi.yml (components.schemas $ref graph)
+description: >-
+  Autoderm has no persistent, addressable resource model — there are no
+  customers, jobs, or stored results to fetch by id. The "data model" is a set
+  of request and response value objects around a single conceptual entity, the
+  Disease, which is the only thing with a stable identifier (its ICD-10 code)
+  and the only entity a client is expected to store. Everything else is
+  transient inference output.
+entity_identifier:
+  primary: icd_10
+  description: >-
+    ICD-10 code. Used both as the key of DiseaseCatalogEntry and as a required
+    field on every DiseasePrediction, which is what joins a live prediction to
+    the cached catalog.
+  id_prefixes: none — Autoderm does not use prefixed object ids
+entities:
+  - name: DiseasePrediction
+    kind: value-object
+    description: One ranked condition prediction. Returned top-5, descending confidence.
+    fields:
+      - {name: disease, type: string, required: true, description: Disease label, see disease catalog for details}
+      - {name: confidence, type: number, required: true, description: Prediction confidence score (0-1)}
+      - {name: icd_10, type: string, required: true, description: ICD-10 code for the disease}
+      - {name: name, type: string, required: true, description: Disease name in English}
+  - name: DiseaseModelResponse
+    kind: response-envelope
+    description: Response of POST /v1/infer-diseases/v1.
+    fields:
+      - {name: predictions, type: array, required: true, items: DiseasePrediction}
+      - {name: skin_tone, type: SkinToneModelResponse, required: false, nullable: true}
+  - name: SkinToneModelResponse
+    kind: value-object
+    description: Fitzpatrick skin type classification.
+    fields:
+      - {name: fitzpatrick, type: integer, required: true, description: 1 is lightest and 6 is darkest}
+      - {name: confidence, type: number, required: true}
+  - name: AgeModelResponse
+    kind: value-object
+    fields:
+      - {name: age, type: number, required: true, description: Predicted age of the subject in years}
+  - name: BooleanAnalysis
+    kind: value-object
+    description: Generic binary classifier envelope; the response of the genitals detector.
+    fields:
+      - {name: prediction, type: boolean, required: true}
+      - {name: confidence, type: number, required: true}
+  - name: DetectBlurResponse
+    kind: value-object
+    fields:
+      - {name: is_blurry, type: boolean, required: true}
+      - {name: variance, type: number, required: true, description: The computed variance of the Laplacian (blur metric)}
+  - name: DiseaseCatalogEntry
+    kind: reference-entity
+    description: >-
+      One row of the static disease catalog. Localized into seven languages.
+      Guaranteed static for a given model version; intended to be fetched once
+      and cached.
+    key: icd_10
+    fields:
+      - {name: icd_10, type: string, required: true}
+      - {name: categories, type: array, required: true, items: DiseaseCategory}
+      - {name: en, type: DiseaseCatalogLocalizedEntry, required: true}
+      - {name: fr, type: DiseaseCatalogLocalizedEntry, required: true, nullable: true}
+      - {name: de, type: DiseaseCatalogLocalizedEntry, required: true, nullable: true}
+      - {name: it, type: DiseaseCatalogLocalizedEntry, required: true, nullable: true}
+      - {name: es, type: DiseaseCatalogLocalizedEntry, required: true, nullable: true}
+      - {name: sv, type: DiseaseCatalogLocalizedEntry, required: true, nullable: true}
+      - {name: zh, type: DiseaseCatalogLocalizedEntry, required: true, nullable: true}
+  - name: DiseaseCatalogLocalizedEntry
+    kind: value-object
+    fields:
+      - {name: name, type: string, required: true}
+      - {name: simple_name, type: string, required: true, nullable: true, description: layman's name}
+      - {name: read_more_url, type: string, required: true, nullable: true}
+  - name: DiseaseCategory
+    kind: enum
+    description: Category classification attached to each catalog entry.
+  - name: MedicalDeviceLabel
+    kind: reference-entity
+    description: >-
+      The regulatory device label, served anonymously at GET /v1/label. Rare
+      and notable — the compliance artifact is itself an API resource.
+    fields:
+      - {name: device_name, type: string, required: true}
+      - {name: device_type, type: string, required: true}
+      - {name: version, type: string, required: true}
+      - {name: manufacturer, type: string, required: true}
+      - {name: manufacture_date, type: string, required: true}
+      - {name: ce_mark, type: string, required: true}
+      - {name: unique_device_identifier, type: string, required: true}
+      - {name: eifu, type: string, required: true}
+      - {name: warning, type: string, required: false, nullable: true}
+      - {name: support, type: string, required: false, nullable: true}
+      - {name: uk_responsible_person, type: string, required: false, nullable: true}
+  - name: Version
+    kind: value-object
+    fields:
+      - {name: name, type: string, required: true}
+      - {name: version, type: string, required: true}
+  - name: HTTPValidationError
+    kind: error-envelope
+    fields:
+      - {name: detail, type: array, items: ValidationError}
+  - name: ValidationError
+    kind: error-detail
+    fields:
+      - {name: loc, type: array, required: true}
+      - {name: msg, type: string, required: true}
+      - {name: type, type: string, required: true}
+      - {name: input, required: false}
+      - {name: ctx, type: object, required: false}
+relationships:
+  - from: DiseaseModelResponse
+    to: DiseasePrediction
+    type: has_many
+    via: predictions
+    source: $ref
+  - from: DiseaseModelResponse
+    to: SkinToneModelResponse
+    type: has_one
+    via: skin_tone
+    source: $ref
+    note: Present only when include_skin_tone=true.
+  - from: DiseasePrediction
+    to: DiseaseCatalogEntry
+    type: belongs_to
+    via: icd_10
+    source: id-reference
+    confidence: high
+    note: >-
+      The join the whole integration depends on. Predictions carry only an
+      English name; localized and layman-facing labels plus read-more links
+      come from the cached catalog, matched on icd_10.
+  - from: DiseaseCatalogEntry
+    to: DiseaseCatalogLocalizedEntry
+    type: has_many
+    via: en, fr, de, it, es, sv, zh
+    source: $ref
+  - from: DiseaseCatalogEntry
+    to: DiseaseCategory
+    type: has_many
+    via: categories
+    source: $ref
+  - from: HTTPValidationError
+    to: ValidationError
+    type: has_many
+    via: detail
+    source: $ref
+lifecycle_note: >-
+  Nothing returned by an inference endpoint is retrievable later. There is no
+  GET-by-id for a prediction and no job/result resource — the response IS the
+  record, and the client is responsible for persisting it. Inference metadata
+  (two-eyes, skin detection, age, skin tone) is computed and stored server-side
+  by Autoderm and is not exposed; the spec states plainly that "age is never
+  returned to the user".

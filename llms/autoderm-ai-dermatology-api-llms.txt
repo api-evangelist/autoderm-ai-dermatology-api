@@ -1,0 +1,129 @@
+# Autoderm — AI Dermatology API
+
+> Autoderm is a white-label REST API for AI-powered analysis of skin images. POST one image to
+> https://api.autoderm.ai and receive the top five most probable dermatological conditions, each with a
+> confidence score (0-1), an ICD-10 code and an English name, plus optional Fitzpatrick skin-type
+> classification. Autoderm is a regulated medical device — CE-marked under EU MDD 93/42/EEC as a legacy
+> Class I device, transitioning to MDR Class IIa, and holding FDA Breakthrough Device Designation. It is a
+> decision-support and triage tool, NOT a diagnostic device.
+
+## Read this first
+
+Autoderm's documentation places MANDATORY requirements on any interface that displays its output. If you
+are building an agent, chatbot, or UI on this API you must:
+
+- Display "Results are for information only and are not a medical diagnosis." wherever results are shown,
+  visible without scrolling and never obscured.
+- Treat confidence scores comparatively (ranking likelihood), not as clinical probabilities.
+- Never present a result as an "all clear" — the device cannot output "no disease detected".
+- Give end users the Instructions for Use, or equivalent instructions carrying at minimum all the safety
+  warnings in the official eIFU.
+
+Full text: https://docs.autoderm.ai/en/medical-device/interface-creation
+
+## Authentication
+
+HTTP Bearer token in the Authorization header. Server-to-server only; never embed in client-side code.
+
+    Authorization: Bearer YOUR_API_TOKEN
+
+Tokens are issued from the Autoderm dashboard at https://app.autoderm.ai. There is no OAuth 2.0
+authorization server, no OpenID Connect discovery, and no scopes. Missing or invalid credentials return
+HTTP 401 with the body {"detail":"Missing Authorization header"}.
+
+## Base URL
+
+    https://api.autoderm.ai
+
+The legacy platform (https://autoderm.ai/v1, primary endpoint /v1/query, Api-Key header auth) is being
+retired. Legacy authentication is not accepted on the new platform. Migration guide:
+https://docs.autoderm.ai/en/disease-detection-api/migrating-from-legacy-api
+
+## APIs
+
+- [Autoderm AI Dermatology API](https://docs.autoderm.ai/en): REST API for skin-image inference — disease
+  detection, skin tone, blur screening, content safety, and the regulatory device label.
+
+## Specs
+
+- [OpenAPI 3.1.0 (live)](https://api.autoderm.ai/openapi.json): 17 operations, version 2.3.6. Mirrored
+  byte-identically at https://docs.autoderm.ai/openapi.json
+- [OpenAPI (repo copy)](openapi/autoderm-ai-dermatology-api-openapi.yml)
+
+## Core operations
+
+- `POST /v1/infer-diseases/v1` — the primary endpoint. multipart/form-data with an `image` field. Query
+  params: `include_skin_tone` (bool, default false), `require_anonymous` (bool, default false). Returns
+  `{predictions: [{disease, confidence, icd_10, name}], skin_tone?}`.
+- `GET /v1/infer-diseases/v1/diseases` — the static disease catalog: ICD-10 code, categories, and
+  localized name / layman's name / read-more URL in en, fr, de, it, es, sv, zh. Fetch ONCE and cache; the
+  docs explicitly say not to call this at runtime.
+- `POST /v1/utils/detect-blur` — screen image quality before spending a metered inference call. Returns
+  `{is_blurry, variance}`.
+- `POST /v1/infer-skin-tone/v1` — Fitzpatrick skin type 1-6 with confidence.
+- `POST /v1/infer-genitals/v1` — binary content-safety classifier.
+- `POST /v1/infer-age/v1` — predicted age in years.
+- `GET /v1/label` — the regulatory medical-device label (anonymous). Manufacturer, CE mark class, UDI,
+  eIFU pointer, UK responsible person.
+- `GET /version`, `GET /health` — anonymous; version and liveness.
+
+## Image requirements
+
+- Minimum resolution 224 x 224 pixels.
+- Maximum file size 5 MB per the documentation. (The live OpenAPI schema descriptions say 10.00 MB — the
+  two disagree; treat 5 MB as the safe ceiling.)
+- Accepted formats: JPG, PNG, BMP, GIF, TIFF, WebP, DICOM and related formats.
+- The lesion should fill most of the frame, in focus, evenly lit, plain background, no filters, unedited.
+
+## Conventions
+
+- No idempotency key. Retrying a timed-out inference call bills a second detection.
+- No pagination — no operation returns a paged collection.
+- No rate-limit headers. Metering is by monthly detection quota, not requests per second.
+- `x-request-id` (UUID) is returned on every response; quote it when contacting support.
+- Errors are `{"detail": ...}` as application/json — an ARRAY of validation objects on 422, a plain STRING
+  on 401. Not RFC 9457.
+- Semantic versioning; 90-day advance notice before any deprecation.
+
+## Docs
+
+- [Overview](https://docs.autoderm.ai/en/getting-started/overview)
+- [Getting started](https://docs.autoderm.ai/en/getting-started/getting-started)
+- [Disease Detection API](https://docs.autoderm.ai/en/disease-detection-api/disease-detection-api)
+- [Migrating from the legacy API](https://docs.autoderm.ai/en/disease-detection-api/migrating-from-legacy-api)
+- [API versioning & deprecation policy](https://docs.autoderm.ai/en/support/api-versioning)
+- [Service Level Agreement](https://docs.autoderm.ai/en/support/service-level-agreement)
+- [Support & contact](https://docs.autoderm.ai/en/support/support-contact)
+- [Interface creation requirements](https://docs.autoderm.ai/en/medical-device/interface-creation)
+- [eIFU — Electronic Instructions For Use](https://docs.autoderm.ai/en/medical-device/eifu)
+- [Swagger UI](https://docs.autoderm.ai/en/swagger-ui)
+- [API reference](https://docs.autoderm.ai/en/api-reference)
+
+## Commercial
+
+- [Pricing](https://autoderm.ai/pricing/): Trial — 5 one-time detections, free, no card. Basic — $100/mo
+  for 100 detections, then $1.00 per call. Enterprise — unlimited, custom.
+- [Sign up](https://app.autoderm.ai/en/auth/sign-up) · [Log in](https://app.autoderm.ai/en/auth/login)
+- [Terms of Service](https://autoderm.ai/terms-of-service-autoderm/) ·
+  [Privacy Policy](https://autoderm.ai/privacy-policy/)
+- [Regulatory](https://autoderm.ai/regulatory/) · [Clinical evidence](https://autoderm.ai/clinical-evidence/)
+- SLA: 99.5% monthly uptime for Basic and Enterprise, with a service-credit schedule.
+
+## SDKs
+
+- [autoderm (Python, PyPI)](https://pypi.org/project/autoderm/) — official, but last released 2024-05-31
+  and still targeting the legacy autoderm.ai/v1 surface.
+- [github.com/autodermai/autoderm_sdk](https://github.com/autodermai/autoderm_sdk)
+- The documentation states: "No SDK is required. The API is language-agnostic and can be used with any
+  standard HTTP client."
+
+## Not published
+
+No MCP server. No A2A agent card. No webhooks or event stream. No AsyncAPI. No status page. No dated
+changelog. No /.well-known/ documents of any kind (including security.txt). No Postman collection.
+
+## Contact
+
+- support@autoderm.ai
+- https://docs.autoderm.ai/en/support/support-contact
+- Report serious incidents to the manufacturer and your competent authority.

@@ -1,0 +1,71 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: Autoderm
+providerId: autoderm-ai-dermatology-api
+generated: '2026-08-09'
+method: searched
+created: '2026-08-09'
+modified: '2026-08-09'
+tags:
+  - Rate Limiting
+  - Medical Imaging
+  - AI Inference
+description: >-
+  Autoderm meters by DETECTION (one inference call), not by requests per
+  second. Entitlement is a monthly detection allowance attached to the plan;
+  on the Basic plan, exceeding it does not throttle the caller — it bills
+  $1.00 per additional call. No rate-limit response headers are documented and
+  none were observed on live 200 or 401 responses probed 2026-08-09, so a
+  client has no in-band signal of remaining quota.
+sources:
+  - https://autoderm.ai/pricing/
+  - https://pypi.org/project/autoderm/
+headers:
+  requestId: x-request-id
+  rateLimitRemaining: null
+  rateLimitReset: null
+  note: >-
+    No X-RateLimit-* or RFC 9239 RateLimit headers are documented or observed.
+    x-request-id is present on responses and is the only correlation signal.
+responseCodes:
+  throttled: not documented
+  quotaExceeded: not documented
+limits:
+  - name: Trial plan detections
+    plan: Trial
+    scope: account
+    metric: detections
+    limit: 5
+    timeFrame: one-time
+    note: '"5 one-time detections", no credit card required.'
+  - name: Basic plan included detections
+    plan: Basic
+    scope: account
+    metric: detections
+    limit: 100
+    timeFrame: month
+    overage: $1.00 per detection beyond the included 100
+  - name: Enterprise plan volume
+    plan: Enterprise
+    scope: account
+    metric: detections
+    limit: -1
+    timeFrame: month
+    note: '"unlimited API volume", custom pricing.'
+legacy_limits:
+  note: >-
+    Recorded for completeness — this limit is documented only in the official
+    PyPI SDK README and applies to the LEGACY autoderm.ai/v1 platform, not to
+    api.autoderm.ai.
+  source: https://pypi.org/project/autoderm/
+  limits:
+    - name: Legacy free plan
+      scope: account
+      metric: requests
+      limit: 10
+      timeFrame: day
+      quote: 'On the free plan, you are limited to 10 API calls a day'
+gaps:
+  - No published requests-per-second or burst limit.
+  - No rate-limit or quota headers on responses.
+  - No documented status code or error body for quota exhaustion.

@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "image": {
+      "type": "string",
+      "contentMediaType": "application/octet-stream",
+      "title": "Image",
+      "description": "Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM."
+    }
+  },
+  "type": "object",
+  "required": [
+    "image"
+  ],
+  "title": "Body_detect_blur_v1_utils_detect_blur_post",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.autoderm.ai/schemas/Body_detect_blur_v1_utils_detect_blur_post.json"
+}

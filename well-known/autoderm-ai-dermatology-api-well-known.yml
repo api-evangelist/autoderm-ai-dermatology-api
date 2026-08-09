@@ -1,0 +1,84 @@
+generated: '2026-08-09'
+method: probed
+source: live GET of the RFC 8615 /.well-known/ surface on every Autoderm host
+description: >-
+  Autoderm publishes no /.well-known/ discovery documents on any of its hosts.
+  This is a recorded negative result, not an unattempted probe. Two of the hosts
+  answer 200 to EVERY /.well-known/* path with an HTML single-page-app shell
+  (docs.autoderm.ai and app.autoderm.ai return the docs login page); those are
+  soft-404s and are recorded as such, never as hits.
+hosts:
+  - host: https://api.autoderm.ai
+    note: OpenAPI servers[0] — a FastAPI app that returns a real JSON 404
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://autoderm.ai
+    note: marketing site (WordPress) — real 404 status with an HTML error page
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /security.txt
+        status: 404
+  - host: https://docs.autoderm.ai
+    note: >-
+      SOFT-404 HOST. Next.js SPA returns HTTP 200 with the docs login HTML for
+      every unknown path, including /.well-known/*. Verified with the control
+      probe /en/this-page-does-not-exist-xyz123 -> 200 + identical login shell.
+      No document here is treated as a hit.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        hit: false
+        reason: soft-404 (HTML login shell, not RFC 9116 text)
+      - path: /.well-known/agent-card.json
+        status: 200
+        hit: false
+        reason: soft-404 (HTML login shell, not an AgentCard JSON object)
+      - path: /.well-known/agent.json
+        status: 200
+        hit: false
+        reason: soft-404 (HTML login shell, not an AgentCard JSON object)
+  - host: https://app.autoderm.ai
+    note: SOFT-404 HOST — same Next.js catch-all behavior as docs.autoderm.ai
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        hit: false
+        reason: soft-404 (HTML application shell)
+      - path: /.well-known/agent-card.json
+        status: 200
+        hit: false
+        reason: soft-404 (HTML application shell)
+  - host: https://web.autoderm.ai
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+summary:
+  documents_found: 0
+  security_txt: false
+  openid_configuration: false
+  oauth_authorization_server: false
+  api_catalog: false
+  ai_plugin: false
+  agent_card: false

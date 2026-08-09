@@ -1,0 +1,93 @@
+{
+  "properties": {
+    "icd_10": {
+      "type": "string",
+      "title": "Icd 10"
+    },
+    "categories": {
+      "items": {
+        "$ref": "DiseaseCategory.json"
+      },
+      "type": "array",
+      "title": "Categories"
+    },
+    "en": {
+      "$ref": "DiseaseCatalogLocalizedEntry.json"
+    },
+    "fr": {
+      "anyOf": [
+        {
+          "$ref": "DiseaseCatalogLocalizedEntry.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "de": {
+      "anyOf": [
+        {
+          "$ref": "DiseaseCatalogLocalizedEntry.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "it": {
+      "anyOf": [
+        {
+          "$ref": "DiseaseCatalogLocalizedEntry.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "es": {
+      "anyOf": [
+        {
+          "$ref": "DiseaseCatalogLocalizedEntry.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sv": {
+      "anyOf": [
+        {
+          "$ref": "DiseaseCatalogLocalizedEntry.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "zh": {
+      "anyOf": [
+        {
+          "$ref": "DiseaseCatalogLocalizedEntry.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "required": [
+    "icd_10",
+    "categories",
+    "en",
+    "fr",
+    "de",
+    "it",
+    "es",
+    "sv",
+    "zh"
+  ],
+  "title": "DiseaseCatalogEntry",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.autoderm.ai/schemas/DiseaseCatalogEntry.json"
+}

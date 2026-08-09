@@ -1,0 +1,167 @@
+generated: '2026-08-09'
+method: searched
+source: >-
+  https://docs.autoderm.ai/en/support/api-versioning,
+  https://docs.autoderm.ai/en/support/service-level-agreement,
+  https://docs.autoderm.ai/en/disease-detection-api/migrating-from-legacy-api
+description: >-
+  Autoderm publishes an explicit versioning policy, a written deprecation
+  commitment with a 90-day notice period, and a full Service Level Agreement
+  with an uptime commitment and service-credit table. It does NOT publish a
+  status page or a dated changelog — both were probed and are recorded as
+  absent below.
+versioning:
+  scheme: semver
+  format: MAJOR.MINOR.PATCH
+  current: 2.3.6
+  current_source: https://api.autoderm.ai/version
+  uri_versioning: true
+  docs: https://docs.autoderm.ai/en/support/api-versioning
+  rules:
+    patch: Backward-compatible bug fixes and internal improvements.
+    minor: May introduce new features or optional parameters without breaking existing integrations.
+    major: Reserved for changes that are not backward compatible.
+  discovery_operations:
+    - get_version_version_get
+    - get_version_v1_system_version_get
+  backward_compatibility: >-
+    "Autoderm aims to maintain backward compatibility and to avoid deprecating
+    existing routes whenever possible. Existing endpoints are kept operational
+    as long as they remain safe, maintainable, and compliant with regulatory
+    requirements."
+deprecation:
+  policy_url: https://docs.autoderm.ai/en/support/api-versioning
+  notice_period_days: 90
+  commitments:
+    - Communicating the deprecation at least 90 days in advance
+    - Clearly identifying affected endpoints or behaviors
+    - Providing a documented forward migration path offering equivalent functionality
+  channels: >-
+    Official customer communication channels and documentation updates.
+    Customers are responsible for planning and executing migrations within the
+    communicated timelines.
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  note: >-
+    The policy is a written commitment only. No machine-readable Sunset or
+    Deprecation response header is documented or observed, and no operation in
+    the OpenAPI carries deprecated: true.
+deprecated_operations: []
+migration_in_progress:
+  name: Legacy platform migration
+  from:
+    platform: https://legacy.autoderm.ai
+    api: https://autoderm.ai/v1
+    primary_endpoint: https://autoderm.ai/v1/query
+    auth: Api-Key header
+  to:
+    platform: https://app.autoderm.ai
+    api: https://api.autoderm.ai
+    primary_endpoint: https://api.autoderm.ai/v1/infer-diseases/v1
+    auth: 'Authorization: Bearer'
+  end_of_life_date: not published
+  status: >-
+    "Both platforms remain available during the migration period. The legacy
+    platform will no longer be accessible after the end-of-life date." The date
+    itself is not stated anywhere in the public documentation.
+  docs: https://docs.autoderm.ai/en/disease-detection-api/migrating-from-legacy-api
+  recommended_strategy:
+    - Integrate the new API in parallel with the legacy one
+    - Validate responses and confidence distributions offline
+    - Update UI and downstream logic as needed
+    - Switch production traffic to the new platform
+    - Decommission legacy usage once validation is complete
+sla:
+  url: https://docs.autoderm.ai/en/support/service-level-agreement
+  uptime_target: 99.5%
+  measurement_window: calendar month
+  formula: Uptime Percentage = Actual Availability / (Total minutes in month - Scheduled Downtime) x 100
+  applies_to: The Autoderm API only. The Autoderm web application is explicitly excluded.
+  eligible_customers: Basic and Enterprise
+  downtime_definition: >-
+    Any period during which the API is unavailable or has consistently returned
+    errors (HTTP status codes 404 or 5XX) despite being provided with valid
+    inputs. A time period will not be considered Downtime if successful API
+    calls (HTTP status codes 2XX) have been observed.
+  scheduled_downtime_notice: at least two business days in advance, by email to Organization members
+  service_credits:
+    - availability: 99.0% to 99.5%
+      credit: 10%
+    - availability: 95% to 99%
+      credit: 25%
+    - availability: < 95%
+      credit: 50%
+  credit_claim_window_days: 30
+  credit_contact: support@autoderm.ai
+  credit_cap: 20% of total fees paid for the affected services in the preceding 12 months
+  release_maturity_levels:
+    ga: Fully released and covered by the SLA.
+    beta: Limited release. Not covered by the SLA.
+    alpha: Early release. Not covered by the SLA.
+support_sla:
+  business_hours: 09:00-17:00 Central European Time, Monday to Friday, excluding local bank holidays
+  targets:
+    - severity: Urgent
+      basic: 1 Business Day
+      enterprise: 1 Business Hour
+    - severity: High
+      basic: 2 Business Days
+      enterprise: 4 Business Hours
+    - severity: Normal
+      basic: 7 Business Days
+      enterprise: 1 Business Day
+    - severity: Low
+      basic: 14 Business Days
+      enterprise: 7 Business Days
+status_page: null
+status_page_probe:
+  method: probed
+  checked: '2026-08-09'
+  results:
+    - url: https://status.autoderm.ai
+      status: DNS NXDOMAIN
+    - url: https://autoderm.statuspage.io
+      status: 200
+      hit: false
+      reason: >-
+        Redirects to the Atlassian Statuspage marketing site (title "Real-Time
+        Incident Communication with Statuspage | Atlassian"). Not an Autoderm
+        status page.
+    - url: https://autoderm.instatus.com
+      status: 200
+      hit: false
+      reason: >-
+        Serves the Instatus marketing homepage (title "Instatus - Get ready for
+        downtime"). Not an Autoderm status page.
+  conclusion: >-
+    No status page. This is a real gap for a provider that commits to a 99.5%
+    uptime SLA and puts the burden of proving downtime on the customer, who
+    "must provide log files showing Unscheduled Downtime and the date and time
+    it occured".
+changelog: null
+changelog_probe:
+  method: probed
+  checked: '2026-08-09'
+  results:
+    - url: https://autoderm.ai/changelog/
+      status: 404
+    - url: https://docs.autoderm.ai/en/changelog
+      status: 200
+      hit: false
+      reason: soft-404 — the docs SPA returns its login shell for every unknown path
+  conclusion: >-
+    No dated changelog is published. The only version signals are the semver
+    string on GET /version (2.3.6) and the medical-device label's manufacture
+    date, currently (11) 20260803.
+incident_reporting:
+  url: https://docs.autoderm.ai/en/support/support-contact
+  regulatory_obligation: >-
+    "If you encounter a service disruption, incorrect behavior, or suspected
+    malfunction that could impact clinical use or patient safety, please report
+    it without delay." Autoderm investigates and documents reported incidents
+    in accordance with its quality management and regulatory obligations.
+  vigilance: >-
+    The eIFU additionally instructs end users to "Report any serious incident
+    to the manufacturer and the competent authority" — the medical-device
+    vigilance channel, which sits alongside (not inside) the API support path.

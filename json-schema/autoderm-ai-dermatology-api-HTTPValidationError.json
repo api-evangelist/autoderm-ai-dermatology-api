@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "detail": {
+      "items": {
+        "$ref": "ValidationError.json"
+      },
+      "type": "array",
+      "title": "Detail"
+    }
+  },
+  "type": "object",
+  "title": "HTTPValidationError",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.autoderm.ai/schemas/HTTPValidationError.json"
+}

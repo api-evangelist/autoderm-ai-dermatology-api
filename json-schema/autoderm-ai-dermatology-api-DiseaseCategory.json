@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "enum": [
+    "GENITAL",
+    "BODY"
+  ],
+  "title": "DiseaseCategory",
+  "description": "Categorization tags for diseases.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.autoderm.ai/schemas/DiseaseCategory.json"
+}

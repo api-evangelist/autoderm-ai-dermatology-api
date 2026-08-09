@@ -1,0 +1,36 @@
+{
+  "properties": {
+    "disease": {
+      "type": "string",
+      "title": "Disease",
+      "description": "Disease label, see disease catalog for details"
+    },
+    "confidence": {
+      "type": "number",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence",
+      "description": "Prediction confidence score"
+    },
+    "icd_10": {
+      "type": "string",
+      "title": "Icd 10",
+      "description": "ICD-10 code for the disease"
+    },
+    "name": {
+      "type": "string",
+      "title": "Name",
+      "description": "Disease name in English language, see disease catalog for details"
+    }
+  },
+  "type": "object",
+  "required": [
+    "disease",
+    "confidence",
+    "icd_10",
+    "name"
+  ],
+  "title": "DiseasePrediction",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.autoderm.ai/schemas/DiseasePrediction.json"
+}

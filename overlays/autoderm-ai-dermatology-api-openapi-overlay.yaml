@@ -1,0 +1,162 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Autoderm AI Dermatology API
+  version: 1.0.0
+extends: openapi/autoderm-ai-dermatology-api-openapi.yml
+x-generated: '2026-08-09'
+x-method: generated
+x-source: >-
+  Enhancements derived from Autoderm's own published documentation
+  (docs.autoderm.ai), regulatory page, SLA, and live response headers observed
+  2026-08-09. This overlay never mutates the harvested spec; it records what
+  the harvested spec omits.
+actions:
+  - target: $.info
+    description: Identify the harvest and cross-link the derived artifacts.
+    update:
+      x-apievangelist-provider: autoderm-ai-dermatology-api
+      x-apievangelist-harvested: '2026-08-09'
+      x-apievangelist-source: https://api.autoderm.ai/openapi.json
+      x-artifacts:
+        authentication: authentication/autoderm-ai-dermatology-api-authentication.yml
+        conventions: conventions/autoderm-ai-dermatology-api-conventions.yml
+        errors: errors/autoderm-ai-dermatology-api-problem-types.yml
+        lifecycle: lifecycle/autoderm-ai-dermatology-api-lifecycle.yml
+        conformance: conformance/autoderm-ai-dermatology-api-conformance.yml
+        data_model: data-model/autoderm-ai-dermatology-api-data-model.yml
+        rate_limits: rate-limits/autoderm-ai-dermatology-api-rate-limits.yml
+
+  - target: $.info
+    description: >-
+      The spec ships a title and a version and nothing else. Add the
+      description, contact, licensing and terms that the site publishes.
+    update:
+      description: >-
+        REST API for AI-assisted dermatological image analysis. POST a skin
+        image and receive the top five most probable conditions with confidence
+        scores and ICD-10 codes. Autoderm is a regulated medical device,
+        CE-marked under EU MDD 93/42/EEC as a legacy Class I device and
+        transitioning to MDR Class IIa; it is intended as a decision-support
+        and triage tool and is NOT intended to be used as a means of diagnosis.
+      contact:
+        name: Autoderm Support
+        email: support@autoderm.ai
+        url: https://docs.autoderm.ai/en/support/support-contact
+      termsOfService: https://autoderm.ai/terms-of-service-autoderm/
+      x-privacy-policy: https://autoderm.ai/privacy-policy/
+      x-regulatory: https://autoderm.ai/regulatory/
+      x-eifu: https://docs.autoderm.ai/en/medical-device/eifu
+
+  - target: $.info
+    description: >-
+      Record the medical-device posture as machine-readable metadata, sourced
+      from the live GET /v1/label response.
+    update:
+      x-medical-device:
+        regulated: true
+        ce_mark: MDD Class I
+        directive: EU MDD 93/42/EEC (Article 120 legacy provisions)
+        transitioning_to: MDR Class IIa under EU MDR 2017/745
+        fda: Breakthrough Device Designation (not a clearance or approval)
+        unique_device_identifier: (01)4262385680024(10)2.3.6(11)20260803
+        label_endpoint: /v1/label
+        intended_use: >-
+          A decision support tool for healthcare professionals, and a digital
+          skin analytics tool for laypersons as a search engine, symptom
+          checker and educational resource. The device is not intended to be
+          used as a means of diagnosis.
+        ui_obligations: https://docs.autoderm.ai/en/medical-device/interface-creation
+
+  - target: $
+    description: >-
+      The spec declares no top-level tag metadata; name and describe the four
+      tag groups its operations already use.
+    update:
+      tags:
+        - name: inference
+          description: Model inference endpoints. Metered — each call is a billable detection.
+        - name: utils
+          description: Image-quality utilities intended to run before a metered inference call.
+        - name: system
+          description: Health and version endpoints. Anonymous.
+        - name: device
+          description: Regulatory medical-device label. Anonymous.
+
+  - target: $
+    description: >-
+      Document the servers list with the legacy platform the migration guide
+      names, so consumers of the spec alone can see both surfaces.
+    update:
+      x-legacy-server:
+        url: https://autoderm.ai/v1
+        platform: https://legacy.autoderm.ai
+        primary_endpoint: /query
+        auth: Api-Key header (NOT accepted on api.autoderm.ai)
+        status: being retired; end-of-life date not published
+        migration: https://docs.autoderm.ai/en/disease-detection-api/migrating-from-legacy-api
+
+  - target: $.components.securitySchemes.HTTPBearer
+    description: Describe the bearer scheme, which the harvested spec leaves undocumented.
+    update:
+      description: >-
+        Organization API token issued from https://app.autoderm.ai. Send as
+        "Authorization: Bearer YOUR_API_TOKEN". Server-to-server only — the
+        documentation forbids embedding the token in client-side code. There is
+        no OAuth 2.0 authorization server and no scopes.
+      x-issuance-url: https://app.autoderm.ai/en/auth/sign-up
+
+  - target: $.paths['/v1/infer-diseases/v1'].post
+    description: >-
+      Add the 401 the endpoint actually returns and the quality/billing notes
+      the spec omits.
+    update:
+      x-metered: true
+      x-billing-unit: detection
+      x-retry-hazard: >-
+        No idempotency key exists. A retried upload after a timeout is billed
+        as a second detection.
+      x-recommended-precheck: POST /v1/utils/detect-blur
+      responses:
+        '401':
+          description: >-
+            Missing or invalid Authorization header. Body is
+            {"detail":"Missing Authorization header"}. Observed live
+            2026-08-09; not declared in the published spec.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+
+  - target: $.paths['/v1/infer-diseases/v1/diseases'].get
+    description: Record the caching contract the documentation states for the catalog.
+    update:
+      x-static-per-model-version: true
+      x-caching-guidance: >-
+        Fetch once and cache locally. The documentation states clients should
+        not call the catalog endpoint repeatedly at runtime; use it as a
+        translation and presentation layer for prediction results.
+
+  - target: $.paths['/v1/infer-age/v1'].post
+    description: >-
+      Flag the security inconsistency without asserting the endpoint is open —
+      the operation is the only inference route in the spec with no security
+      requirement.
+    update:
+      x-spec-inconsistency: >-
+        Declared with no security requirement while every sibling inference
+        operation requires HTTPBearer. Likely a spec omission rather than an
+        intentionally anonymous endpoint. Not verified by probing.
+
+  - target: $.paths['/v1/label'].get
+    description: Note that this endpoint is the regulatory evidence surface.
+    update:
+      x-anonymous: true
+      x-regulatory-artifact: true
+      description: >-
+        Returns the regulatory medical-device label: device name and type,
+        version, manufacturer, manufacture date, CE mark class, UDI, eIFU
+        notice, warning, support contact and UK responsible person. Served
+        anonymously — the compliance artifact is itself an API resource.

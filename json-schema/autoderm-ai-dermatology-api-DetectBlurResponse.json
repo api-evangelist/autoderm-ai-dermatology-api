@@ -1,0 +1,22 @@
+{
+  "properties": {
+    "is_blurry": {
+      "type": "boolean",
+      "title": "Is Blurry",
+      "description": "True if the image is considered blurry"
+    },
+    "variance": {
+      "type": "number",
+      "title": "Variance",
+      "description": "The computed variance of the Laplacian (blur metric)"
+    }
+  },
+  "type": "object",
+  "required": [
+    "is_blurry",
+    "variance"
+  ],
+  "title": "DetectBlurResponse",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.autoderm.ai/schemas/DetectBlurResponse.json"
+}

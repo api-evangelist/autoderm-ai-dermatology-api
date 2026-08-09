@@ -1,0 +1,13 @@
+{
+    "device_name": "Autoderm API",
+    "device_type": "Registered Medical Device",
+    "version": "(10) 2.3.6",
+    "manufacturer": "iDoc24 AB, Berzeliigatan 25, 41253 Gothenburg, Sweden.",
+    "manufacture_date": "(11) 20260803",
+    "ce_mark": "MDD Class I",
+    "unique_device_identifier": "(01)4262385680024(10)2.3.6(11)20260803",
+    "eifu": "Read the (electronic) Instructions for Use before use.",
+    "warning": "Warning - Consult Instructions for Use",
+    "support": "support@autoderm.ai, www.autoderm.ai",
+    "uk_responsible_person": "Easy Medical Device Limited, Atlantic Business Centre, Atlantic Street, Broadheath, Altrincham, United Kingdom, WA14 5NQ"
+}
