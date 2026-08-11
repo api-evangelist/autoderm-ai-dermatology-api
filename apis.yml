@@ -36,45 +36,86 @@ tags:
   - clinical-decision-support
   - triage
 apis:
-  - name: Autoderm AI Dermatology API
-    description: >-
-      REST API for AI dermatology inference. POST a skin image as multipart/form-data to
-      https://api.autoderm.ai and receive ranked condition predictions in JSON with ICD-10 codes,
-      confidence scores and English names, optionally with a Fitzpatrick skin-type classification.
-      Also exposes a static localized disease catalog, blur detection, a content-safety classifier,
-      age estimation, health/version endpoints, and the regulatory medical-device label. Authenticated
-      with an HTTP Bearer token issued from the Autoderm dashboard; the legacy Api-Key header scheme is
-      no longer accepted.
-    humanURL: https://docs.autoderm.ai/en
-    baseURL: https://api.autoderm.ai
-    tags:
-      - dermatology-api
-      - ai-dermatology
-      - medical-imaging
-      - telemedicine
-      - skin-analysis
-      - rest-api
-      - openapi
-      - ce-marked
-      - white-label
-      - healthcare
-      - medical-ai
-      - computer-vision
-      - medical-device
-      - icd-10
-    properties:
-      - type: OpenAPI
-        url: openapi/autoderm-ai-dermatology-api-openapi.yml
-      - type: OpenAPI Source
-        url: https://api.autoderm.ai/openapi.json
-      - type: Documentation
-        url: https://docs.autoderm.ai/en
-      - type: APIReference
-        url: https://docs.autoderm.ai/en/api-reference
-      - type: GettingStarted
-        url: https://docs.autoderm.ai/en/getting-started/getting-started
-      - type: LLMSTxt
-        url: https://autoderm.ai/llms.txt
+- aid: autoderm-ai-dermatology-api:autoderm-ai-dermatology-api-device-api
+  name: Autoderm – AI Dermatology API Device API
+  description: The device API from Autoderm – AI Dermatology API — 1 operation(s) for device.
+  humanURL: https://docs.autoderm.ai/en
+  baseURL: https://api.autoderm.ai
+  tags:
+  - device
+  properties:
+  - type: OpenAPI
+    url: openapi/autoderm-ai-dermatology-api-device-api-openapi.yml
+  - type: OpenAPI Source
+    url: https://api.autoderm.ai/openapi.json
+  - type: Documentation
+    url: https://docs.autoderm.ai/en
+  - type: APIReference
+    url: https://docs.autoderm.ai/en/api-reference
+  - type: GettingStarted
+    url: https://docs.autoderm.ai/en/getting-started/getting-started
+  - type: LLMSTxt
+    url: https://autoderm.ai/llms.txt
+- aid: autoderm-ai-dermatology-api:autoderm-ai-dermatology-api-inference-api
+  name: Autoderm – AI Dermatology API Inference API
+  description: The inference API from Autoderm – AI Dermatology API — 5 operation(s) for inference.
+  humanURL: https://docs.autoderm.ai/en
+  baseURL: https://api.autoderm.ai
+  tags:
+  - inference
+  properties:
+  - type: OpenAPI
+    url: openapi/autoderm-ai-dermatology-api-inference-api-openapi.yml
+  - type: OpenAPI Source
+    url: https://api.autoderm.ai/openapi.json
+  - type: Documentation
+    url: https://docs.autoderm.ai/en
+  - type: APIReference
+    url: https://docs.autoderm.ai/en/api-reference
+  - type: GettingStarted
+    url: https://docs.autoderm.ai/en/getting-started/getting-started
+  - type: LLMSTxt
+    url: https://autoderm.ai/llms.txt
+- aid: autoderm-ai-dermatology-api:autoderm-ai-dermatology-api-system-api
+  name: Autoderm – AI Dermatology API System API
+  description: The system API from Autoderm – AI Dermatology API — 6 operation(s) for system.
+  humanURL: https://docs.autoderm.ai/en
+  baseURL: https://api.autoderm.ai
+  tags:
+  - system
+  properties:
+  - type: OpenAPI
+    url: openapi/autoderm-ai-dermatology-api-system-api-openapi.yml
+  - type: OpenAPI Source
+    url: https://api.autoderm.ai/openapi.json
+  - type: Documentation
+    url: https://docs.autoderm.ai/en
+  - type: APIReference
+    url: https://docs.autoderm.ai/en/api-reference
+  - type: GettingStarted
+    url: https://docs.autoderm.ai/en/getting-started/getting-started
+  - type: LLMSTxt
+    url: https://autoderm.ai/llms.txt
+- aid: autoderm-ai-dermatology-api:autoderm-ai-dermatology-api-utils-api
+  name: Autoderm – AI Dermatology API Utils API
+  description: The utils API from Autoderm – AI Dermatology API — 1 operation(s) for utils.
+  humanURL: https://docs.autoderm.ai/en
+  baseURL: https://api.autoderm.ai
+  tags:
+  - utils
+  properties:
+  - type: OpenAPI
+    url: openapi/autoderm-ai-dermatology-api-utils-api-openapi.yml
+  - type: OpenAPI Source
+    url: https://api.autoderm.ai/openapi.json
+  - type: Documentation
+    url: https://docs.autoderm.ai/en
+  - type: APIReference
+    url: https://docs.autoderm.ai/en/api-reference
+  - type: GettingStarted
+    url: https://docs.autoderm.ai/en/getting-started/getting-started
+  - type: LLMSTxt
+    url: https://autoderm.ai/llms.txt
 maintainers:
   - FN: Alexander Börve
     url: https://autoderm.ai/
@@ -85,6 +126,8 @@ generated:
   confidence: 90
   at: '2026-08-07T07:19:02.528Z'
 common:
+- type: MCPServer
+  url: mcp/autoderm-ai-dermatology-api-mcp.yml
 - type: Website
   url: https://autoderm.ai/
 - type: DeveloperPortal
