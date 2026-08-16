@@ -1,0 +1,14 @@
+{
+  "repo": "autoderm-ai-dermatology-api",
+  "feeds": [
+    {
+      "source": "https://docs.autoderm.ai/en/support/support-contact",
+      "feed_url": "https://docs.autoderm.ai/en/support/support-contact",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-15T12:22:01Z"
+}
