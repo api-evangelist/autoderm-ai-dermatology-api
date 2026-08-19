@@ -1,0 +1,869 @@
+{
+  "item": [
+    {
+      "id": "d0fff971-0a00-42da-972a-5577127d1bcf",
+      "name": "inference",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fdc4b8db-c3fc-4ddd-bc3d-c94eaf313c18",
+          "name": "Infer Genitals V1",
+          "request": {
+            "name": "Infer Genitals V1",
+            "description": {
+              "content": "Analyze an image to determine if it contains genitalia.\n\nThe HTTP response is the genital flag only. Top body-part predictions are stored in inference metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "infer-genitals",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "require_anonymous",
+                  "value": "false",
+                  "description": "Whether to require the image to be anonymous. Images where the subject can be identified will be rejected."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b5b6b16e-8a7a-4a02-8676-fbf70fdbef27",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infer-genitals",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "require_anonymous",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"prediction\": true,\n  \"confidence\": 0.18386433193714202\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4468b47a-0ab2-48a2-b8bb-1b39f403304d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infer-genitals",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "require_anonymous",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a699276-68c6-4fb1-b4c6-fc0b030e5037",
+          "name": "Infer Age V1",
+          "request": {
+            "name": "Infer Age V1",
+            "description": {
+              "content": "Analyze an image and return the predicted age of the subject.\n\nInternal/backfill utility endpoint: no API key, no usage tracking, no stored_images write.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "infer-age",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fb68b96b-f813-4f55-939a-856c2aa269da",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infer-age",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"age\": 9007.85919539651\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2be767d-8aa9-45ce-a61e-edb2856a5217",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infer-age",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51232611-1826-4ec1-8e5e-17b8c155353a",
+          "name": "Infer Diseases V1",
+          "request": {
+            "name": "Infer Diseases V1",
+            "description": {
+              "content": "Analyze an image and return the top 5 most probable skin diseases detected, using the AutoDerm v2.2 model.\n\nResponse is returned as soon as genitals, diseases_detector_v1 and diseases_detector_v2 (and optionally\nskin_tone if include_skin_tone=true) complete. Two-eyes, skin_detection, age, and skin_tone (if not\nrequested) run in the background and are stored as inference metadata after completion; age is never\nreturned to the user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "infer-diseases",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_skin_tone",
+                  "value": "false",
+                  "description": "Whether to include Fitzpatrick skin type prediction in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "require_anonymous",
+                  "value": "false",
+                  "description": "Whether to require the image to be anonymous. Images where the subject can be identified will be rejected."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4950d7d4-1965-498c-94ec-4add7e74d8da",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infer-diseases",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_skin_tone",
+                      "value": "false"
+                    },
+                    {
+                      "key": "require_anonymous",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"predictions\": [\n    {\n      \"disease\": \"string\",\n      \"confidence\": 0.9145215362413672,\n      \"icd_10\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"disease\": \"string\",\n      \"confidence\": 0.8824159092910471,\n      \"icd_10\": \"string\",\n      \"name\": \"string\"\n    }\n  ],\n  \"skin_tone\": {\n    \"fitzpatrick\": 2,\n    \"confidence\": 0.6649256982194703\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a559cb66-fee9-415d-9326-efd3e6d01019",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infer-diseases",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_skin_tone",
+                      "value": "false"
+                    },
+                    {
+                      "key": "require_anonymous",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aff61760-dca4-4e5f-83e7-e3d89d402c0e",
+          "name": "Get Disease Catalog V1",
+          "request": {
+            "name": "Get Disease Catalog V1",
+            "description": {
+              "content": "Return the complete list of diseases the model can predict.\n\nThis catalog is static and will never change. It is intended to be cached and used as a translation layer for presentation purposes.\nAPI users should avoid calling this endpoint repeatedly and instead cache the result in the backend that displays results to end users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "infer-diseases",
+                "v1",
+                "diseases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e9994f13-d640-44d5-822e-bef650a21086",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infer-diseases",
+                    "v1",
+                    "diseases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"icd_10\": \"string\",\n    \"categories\": [\n      \"BODY\",\n      \"GENITAL\"\n    ],\n    \"en\": {\n      \"name\": \"string\",\n      \"simple_name\": \"string\",\n      \"read_more_url\": \"string\"\n    },\n    \"fr\": {\n      \"name\": \"string\",\n      \"simple_name\": \"string\",\n      \"read_more_url\": \"string\"\n    },\n    \"de\": {\n      \"name\": \"string\",\n      \"simple_name\": \"string\",\n      \"read_more_url\": \"string\"\n    },\n    \"it\": {\n      \"name\": \"string\",\n      \"simple_name\": \"string\",\n      \"read_more_url\": \"string\"\n    },\n    \"es\": {\n      \"name\": \"string\",\n      \"simple_name\": \"string\",\n      \"read_more_url\": \"string\"\n    },\n    \"sv\": {\n      \"name\": \"string\",\n      \"simple_name\": \"string\",\n      \"read_more_url\": \"string\"\n    },\n    \"zh\": {\n      \"name\": \"string\",\n      \"simple_name\": \"string\",\n      \"read_more_url\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a3f8a4f-0ff8-44ff-af4c-47923eb0b540",
+          "name": "Infer Skin Tone V1",
+          "request": {
+            "name": "Infer Skin Tone V1",
+            "description": {
+              "content": "Analyze an image to determine the Fitzpatrick skin type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "infer-skin-tone",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "require_anonymous",
+                  "value": "false",
+                  "description": "Whether to require the image to be anonymous. Images where the subject can be identified will be rejected."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d615cbe9-c8c2-4fc3-8559-36a09b9b669b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infer-skin-tone",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "require_anonymous",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fitzpatrick\": 3,\n  \"confidence\": 0.450657956069085\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9eb802b-4073-446a-8e7b-95fe55437047",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infer-skin-tone",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "require_anonymous",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.autoderm.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9de765c5-6101-4dae-9306-221780259aad",
+    "name": "Autoderm Inference API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

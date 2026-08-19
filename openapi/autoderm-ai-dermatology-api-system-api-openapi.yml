@@ -1,0 +1,205 @@
+openapi: 3.2.0
+info:
+  title: Autoderm System API
+  version: 2.3.6
+servers:
+- url: https://api.autoderm.ai
+  description: Autoderm API Server (prod)
+tags:
+- name: system
+paths:
+  /healthz:
+    get:
+      tags:
+      - system
+      summary: Get Health
+      description: 'Health check endpoint for the API.
+
+
+        Returns a simple status response indicating that the service is running.'
+      operationId: get_health_healthz_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Get Health Healthz Get
+    head:
+      tags:
+      - system
+      summary: Get Health
+      description: 'Health check endpoint for the API.
+
+
+        Returns a simple status response indicating that the service is running.'
+      operationId: get_health_healthz_head
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Get Health Healthz Head
+  /health:
+    get:
+      tags:
+      - system
+      summary: Get Health
+      description: 'Health check endpoint for the API.
+
+
+        Returns a simple status response indicating that the service is running.'
+      operationId: get_health_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Get Health Health Get
+    head:
+      tags:
+      - system
+      summary: Get Health
+      description: 'Health check endpoint for the API.
+
+
+        Returns a simple status response indicating that the service is running.'
+      operationId: get_health_health_head
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Get Health Health Head
+  /version:
+    get:
+      tags:
+      - system
+      summary: Get Version
+      description: Return the global app name and version.
+      operationId: get_version_version_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+  /v1/system/healthz:
+    get:
+      tags:
+      - system
+      summary: Get Health
+      description: 'Health check endpoint for the API.
+
+
+        Returns a simple status response indicating that the service is running.'
+      operationId: get_health_v1_system_healthz_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Get Health V1 System Healthz Get
+    head:
+      tags:
+      - system
+      summary: Get Health
+      description: 'Health check endpoint for the API.
+
+
+        Returns a simple status response indicating that the service is running.'
+      operationId: get_health_v1_system_healthz_head
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Get Health V1 System Healthz Head
+  /v1/system/health:
+    get:
+      tags:
+      - system
+      summary: Get Health
+      description: 'Health check endpoint for the API.
+
+
+        Returns a simple status response indicating that the service is running.'
+      operationId: get_health_v1_system_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Get Health V1 System Health Get
+    head:
+      tags:
+      - system
+      summary: Get Health
+      description: 'Health check endpoint for the API.
+
+
+        Returns a simple status response indicating that the service is running.'
+      operationId: get_health_v1_system_health_head
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Get Health V1 System Health Head
+  /v1/system/version:
+    get:
+      tags:
+      - system
+      summary: Get Version
+      description: Return the global app name and version.
+      operationId: get_version_v1_system_version_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+components:
+  schemas:
+    Version:
+      properties:
+        name:
+          type: string
+          title: Name
+        version:
+          type: string
+          title: Version
+      type: object
+      required:
+      - name
+      - version
+      title: Version
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

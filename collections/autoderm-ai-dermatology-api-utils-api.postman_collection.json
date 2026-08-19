@@ -1,0 +1,225 @@
+{
+  "item": [
+    {
+      "id": "52d8c21f-adfb-41d2-9c43-e4bf59c3f3a9",
+      "name": "utils",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a412e175-ea03-483d-8021-40b7a0fbfbda",
+          "name": "Detect Blur",
+          "request": {
+            "name": "Detect Blur",
+            "description": {
+              "content": "Analyze an image to determine if it is blurry, using a configurable blur threshold.\n\nAnalyzes the image using the variance of the Laplacian method. Images with a variance below the specified threshold are considered blurry.\nUse this endpoint to automatically filter out low-quality, blurry images before further processing or model inference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "utils",
+                "detect-blur"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "threshold",
+                  "value": "50",
+                  "description": "The blur threshold. A value of 50 is recommended, which typically filters out the blurriest 30% of images."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ae2b5b15-bab1-4a3e-8990-9819fb216fc8",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "utils",
+                    "detect-blur"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "threshold",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"is_blurry\": false,\n  \"variance\": 4827.912955167117\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9d54931-a484-4350-a89b-811db549f0af",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "utils",
+                    "detect-blur"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "threshold",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.autoderm.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "38d105e8-0f37-463d-b8b2-3d4617c924bf",
+    "name": "Autoderm Utils API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

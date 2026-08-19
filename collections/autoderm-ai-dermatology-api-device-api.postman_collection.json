@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "647364ef-ecc5-4a73-a9c4-bef7a45a3776",
+      "name": "device",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f46fe10f-fd86-44ed-8311-ef5fae21cec9",
+          "name": "Get Label",
+          "request": {
+            "name": "Get Label",
+            "description": {
+              "content": "Return the medical device label.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "label"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d33f887d-ff15-44cc-a485-a46afeb28ab4",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"device_name\": \"string\",\n  \"device_type\": \"string\",\n  \"version\": \"string\",\n  \"manufacturer\": \"string\",\n  \"manufacture_date\": \"string\",\n  \"ce_mark\": \"string\",\n  \"unique_device_identifier\": \"string\",\n  \"eifu\": \"string\",\n  \"warning\": \"string\",\n  \"support\": \"string\",\n  \"uk_responsible_person\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.autoderm.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4331af5b-35f3-4242-935c-dbd44aa7c6ac",
+    "name": "Autoderm Device API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

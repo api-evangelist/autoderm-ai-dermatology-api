@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autoderm Device API",
+    "version": "2.3.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "device",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.autoderm.ai/v1/label"
+          },
+          "docs": "Return the medical device label."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

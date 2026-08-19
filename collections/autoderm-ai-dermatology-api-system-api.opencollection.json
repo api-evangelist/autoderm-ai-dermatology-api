@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autoderm System API",
+    "version": "2.3.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "system",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.autoderm.ai/healthz"
+          },
+          "docs": "Health check endpoint for the API.\n\nReturns a simple status response indicating that the service is running."
+        },
+        {
+          "info": {
+            "name": "Get Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.autoderm.ai/healthz"
+          },
+          "docs": "Health check endpoint for the API.\n\nReturns a simple status response indicating that the service is running."
+        },
+        {
+          "info": {
+            "name": "Get Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.autoderm.ai/health"
+          },
+          "docs": "Health check endpoint for the API.\n\nReturns a simple status response indicating that the service is running."
+        },
+        {
+          "info": {
+            "name": "Get Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.autoderm.ai/health"
+          },
+          "docs": "Health check endpoint for the API.\n\nReturns a simple status response indicating that the service is running."
+        },
+        {
+          "info": {
+            "name": "Get Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.autoderm.ai/version"
+          },
+          "docs": "Return the global app name and version."
+        },
+        {
+          "info": {
+            "name": "Get Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.autoderm.ai/v1/system/healthz"
+          },
+          "docs": "Health check endpoint for the API.\n\nReturns a simple status response indicating that the service is running."
+        },
+        {
+          "info": {
+            "name": "Get Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.autoderm.ai/v1/system/healthz"
+          },
+          "docs": "Health check endpoint for the API.\n\nReturns a simple status response indicating that the service is running."
+        },
+        {
+          "info": {
+            "name": "Get Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.autoderm.ai/v1/system/health"
+          },
+          "docs": "Health check endpoint for the API.\n\nReturns a simple status response indicating that the service is running."
+        },
+        {
+          "info": {
+            "name": "Get Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://api.autoderm.ai/v1/system/health"
+          },
+          "docs": "Health check endpoint for the API.\n\nReturns a simple status response indicating that the service is running."
+        },
+        {
+          "info": {
+            "name": "Get Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.autoderm.ai/v1/system/version"
+          },
+          "docs": "Return the global app name and version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autoderm Utils API",
+    "version": "2.3.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "utils",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Detect Blur",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.autoderm.ai/v1/utils/detect-blur",
+            "params": [
+              {
+                "name": "threshold",
+                "value": "",
+                "type": "query",
+                "description": "The blur threshold. A value of 50 is recommended, which typically filters out the blurriest 30% of images."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Analyze an image to determine if it is blurry, using a configurable blur threshold.\n\nAnalyzes the image using the variance of the Laplacian method. Images with a variance below the specified threshold are considered blurry.\nUse this endpoint to automatically filter out low-quality, blurry images before further processing or model inference."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

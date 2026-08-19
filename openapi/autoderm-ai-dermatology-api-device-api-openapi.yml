@@ -1,0 +1,82 @@
+openapi: 3.2.0
+info:
+  title: Autoderm Device API
+  version: 2.3.6
+servers:
+- url: https://api.autoderm.ai
+  description: Autoderm API Server (prod)
+tags:
+- name: device
+paths:
+  /v1/label:
+    get:
+      tags:
+      - device
+      summary: Get Label
+      description: Return the medical device label.
+      operationId: get_label_v1_label_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalDeviceLabel'
+components:
+  schemas:
+    MedicalDeviceLabel:
+      properties:
+        device_name:
+          type: string
+          title: Device Name
+        device_type:
+          type: string
+          title: Device Type
+        version:
+          type: string
+          title: Version
+        manufacturer:
+          type: string
+          title: Manufacturer
+        manufacture_date:
+          type: string
+          title: Manufacture Date
+        ce_mark:
+          type: string
+          title: Ce Mark
+        unique_device_identifier:
+          type: string
+          title: Unique Device Identifier
+        eifu:
+          type: string
+          title: Eifu
+        warning:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Warning
+        support:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Support
+        uk_responsible_person:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Uk Responsible Person
+      type: object
+      required:
+      - device_name
+      - device_type
+      - version
+      - manufacturer
+      - manufacture_date
+      - ce_mark
+      - unique_device_identifier
+      - eifu
+      title: MedicalDeviceLabel
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

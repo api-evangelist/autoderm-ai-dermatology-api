@@ -1,0 +1,26 @@
+{
+  "provider": "autoderm-ai-dermatology-api",
+  "sources": [
+    "autoderm-ai-dermatology-api-device-api-openapi.yml",
+    "autoderm-ai-dermatology-api-inference-api-openapi.yml",
+    "autoderm-ai-dermatology-api-system-api-openapi.yml",
+    "autoderm-ai-dermatology-api-utils-api-openapi.yml"
+  ],
+  "outputs": [
+    "autoderm-ai-dermatology-api-device-api-openapi.yml",
+    "autoderm-ai-dermatology-api-inference-api-openapi.yml",
+    "autoderm-ai-dermatology-api-system-api-openapi.yml",
+    "autoderm-ai-dermatology-api-utils-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "autoderm-ai-dermatology-api-device-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "autoderm-ai-dermatology-api-inference-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "autoderm-ai-dermatology-api-system-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "autoderm-ai-dermatology-api-utils-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

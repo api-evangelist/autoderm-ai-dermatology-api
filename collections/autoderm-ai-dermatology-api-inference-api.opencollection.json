@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Autoderm Inference API",
+    "version": "2.3.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "inference",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Infer Genitals V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.autoderm.ai/v1/infer-genitals/v1",
+            "params": [
+              {
+                "name": "require_anonymous",
+                "value": "",
+                "type": "query",
+                "description": "Whether to require the image to be anonymous. Images where the subject can be identified will be rejected."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Analyze an image to determine if it contains genitalia.\n\nThe HTTP response is the genital flag only. Top body-part predictions are stored in inference metadata."
+        },
+        {
+          "info": {
+            "name": "Infer Age V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.autoderm.ai/v1/infer-age/v1",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Analyze an image and return the predicted age of the subject.\n\nInternal/backfill utility endpoint: no API key, no usage tracking, no stored_images write."
+        },
+        {
+          "info": {
+            "name": "Infer Diseases V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.autoderm.ai/v1/infer-diseases/v1",
+            "params": [
+              {
+                "name": "include_skin_tone",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include Fitzpatrick skin type prediction in the response."
+              },
+              {
+                "name": "require_anonymous",
+                "value": "",
+                "type": "query",
+                "description": "Whether to require the image to be anonymous. Images where the subject can be identified will be rejected."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Analyze an image and return the top 5 most probable skin diseases detected, using the AutoDerm v2.2 model.\n\nResponse is returned as soon as genitals, diseases_detector_v1 and diseases_detector_v2 (and optionally\nskin_tone if include_skin_tone=true) complete. Two-eyes, skin_detection, age, and skin_tone (if not\nrequested) run in the background and are stored as inference metadata after completion; age is never\nreturned to the user."
+        },
+        {
+          "info": {
+            "name": "Get Disease Catalog V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.autoderm.ai/v1/infer-diseases/v1/diseases",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return the complete list of diseases the model can predict.\n\nThis catalog is static and will never change. It is intended to be cached and used as a translation layer for presentation purposes.\nAPI users should avoid calling this endpoint repeatedly and instead cache the result in the backend that displays results to end users."
+        },
+        {
+          "info": {
+            "name": "Infer Skin Tone V1",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.autoderm.ai/v1/infer-skin-tone/v1",
+            "params": [
+              {
+                "name": "require_anonymous",
+                "value": "",
+                "type": "query",
+                "description": "Whether to require the image to be anonymous. Images where the subject can be identified will be rejected."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Analyze an image to determine the Fitzpatrick skin type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

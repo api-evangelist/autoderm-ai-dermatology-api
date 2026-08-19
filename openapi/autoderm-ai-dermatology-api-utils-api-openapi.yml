@@ -1,0 +1,122 @@
+openapi: 3.2.0
+info:
+  title: Autoderm Utils API
+  version: 2.3.6
+servers:
+- url: https://api.autoderm.ai
+  description: Autoderm API Server (prod)
+tags:
+- name: utils
+paths:
+  /v1/utils/detect-blur:
+    post:
+      tags:
+      - utils
+      summary: Detect Blur
+      description: 'Analyze an image to determine if it is blurry, using a configurable blur threshold.
+
+
+        Analyzes the image using the variance of the Laplacian method. Images with a variance below the specified threshold are considered blurry.
+
+        Use this endpoint to automatically filter out low-quality, blurry images before further processing or model inference.'
+      operationId: detect_blur_v1_utils_detect_blur_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: threshold
+        in: query
+        required: false
+        schema:
+          type: number
+          maximum: 300
+          minimum: 0
+          description: The blur threshold. A value of 50 is recommended, which typically filters out the blurriest 30% of images.
+          default: 50
+          title: Threshold
+        description: The blur threshold. A value of 50 is recommended, which typically filters out the blurriest 30% of images.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_detect_blur_v1_utils_detect_blur_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectBlurResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    Body_detect_blur_v1_utils_detect_blur_post:
+      properties:
+        image:
+          type: string
+          contentMediaType: application/octet-stream
+          title: Image
+          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
+      type: object
+      required:
+      - image
+      title: Body_detect_blur_v1_utils_detect_blur_post
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    DetectBlurResponse:
+      properties:
+        is_blurry:
+          type: boolean
+          title: Is Blurry
+          description: True if the image is considered blurry
+        variance:
+          type: number
+          title: Variance
+          description: The computed variance of the Laplacian (blur metric)
+      type: object
+      required:
+      - is_blurry
+      - variance
+      title: DetectBlurResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

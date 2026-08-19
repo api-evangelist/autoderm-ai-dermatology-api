@@ -2,117 +2,107 @@ generated: '2026-08-09'
 method: derived
 status: candidate
 source: openapi/autoderm-ai-dermatology-api-openapi.yml
-description: >-
-  Autoderm publishes NO hosted or remote MCP server. This manifest is a
-  CANDIDATE tool surface derived one-to-one from the operations in Autoderm's
-  own OpenAPI — it describes what an MCP server for this API would expose, and
-  is not a claim that Autoderm operates one. Each tool inherits its real input
+description: Autoderm publishes NO hosted or remote MCP server. This manifest is a CANDIDATE tool surface
+  derived one-to-one from the operations in Autoderm's own OpenAPI — it describes what an MCP server for
+  this API would expose, and is not a claim that Autoderm operates one. Each tool inherits its real input
   contract from the backing operation's parameters and requestBody in the spec.
 search_evidence:
-  - checked: https://api.autoderm.ai/.well-known/ai-plugin.json
-    status: 404
-  - checked: https://api.autoderm.ai/.well-known/oauth-protected-resource
-    status: 404
-  - checked: npm registry search "autoderm"
-    result: 0 packages
-  - checked: https://github.com/autodermai
-    result: 1 repo (autoderm_sdk, Python) — no MCP server
-  - checked: web search for an Autoderm MCP server
-    result: none found
+- checked: https://api.autoderm.ai/.well-known/ai-plugin.json
+  status: 404
+- checked: https://api.autoderm.ai/.well-known/oauth-protected-resource
+  status: 404
+- checked: npm registry search "autoderm"
+  result: 0 packages
+- checked: https://github.com/autodermai
+  result: 1 repo (autoderm_sdk, Python) — no MCP server
+- checked: web search for an Autoderm MCP server
+  result: none found
 server:
   name: autoderm
   transport: null
   url: null
   published: false
-agent_note: >-
-  A meaningful caveat for any agent builder wiring these tools: Autoderm is a
-  CE-marked medical device, and its documentation places MANDATORY presentation
-  obligations on whatever surface shows the result — including a
-  non-dismissible "Results are for information only and are not a medical
-  diagnosis." warning. An MCP client that renders predictions into a chat
-  transcript inherits that obligation. See
-  conventions/autoderm-ai-dermatology-api-conventions.yml#presentation_obligations.
+agent_note: 'A meaningful caveat for any agent builder wiring these tools: Autoderm is a CE-marked medical
+  device, and its documentation places MANDATORY presentation obligations on whatever surface shows the
+  result — including a non-dismissible "Results are for information only and are not a medical diagnosis."
+  warning. An MCP client that renders predictions into a chat transcript inherits that obligation. See
+  conventions/autoderm-ai-dermatology-api-conventions.yml#presentation_obligations.'
 tools:
-  - name: infer_diseases
-    description: >-
-      Analyze a skin image and return the top 5 most probable skin conditions
-      with confidence scores and ICD-10 codes.
-    source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#infer_diseases_v1_v1_infer_diseases_v1_post
-    method: POST
-    path: /v1/infer-diseases/v1
-    auth_required: true
-    metered: true
-    inputs:
-      image: multipart file (required) — min 224x224, JPEG/PNG/WebP/DICOM and others
-      include_skin_tone: boolean query param, default false
-      require_anonymous: boolean query param, default false
-  - name: get_disease_catalog
-    description: >-
-      Fetch the static disease catalog mapping ICD-10 codes to localized names,
-      layman's names and read-more links in en/fr/de/it/es/sv/zh. Fetch once
-      and cache.
-    source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#get_disease_catalog_v1_v1_infer_diseases_v1_diseases_get
-    method: GET
-    path: /v1/infer-diseases/v1/diseases
-    auth_required: true
-    caching: static per model version — do not call at runtime
-  - name: infer_skin_tone
-    description: Classify the Fitzpatrick skin type (1-6) of a skin image.
-    source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#infer_skin_tone_v1_v1_infer_skin_tone_v1_post
-    method: POST
-    path: /v1/infer-skin-tone/v1
-    auth_required: true
-  - name: infer_genitals
-    description: >-
-      Binary classifier flagging whether an image contains genitalia. A content
-      safety pre-check.
-    source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#infer_genitals_v1_v1_infer_genitals_v1_post
-    method: POST
-    path: /v1/infer-genitals/v1
-    auth_required: true
-  - name: infer_age
-    description: Predict the age in years of the subject in an image.
-    source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#infer_age_v1_v1_infer_age_v1_post
-    method: POST
-    path: /v1/infer-age/v1
-    auth_required: false
-    note: >-
-      Declared with no security requirement in the published spec, unlike every
-      sibling inference operation. Recorded as a spec inconsistency; see
-      authentication/#spec_gap.
-  - name: detect_blur
-    description: >-
-      Screen an image for blur before spending a metered inference call.
-      Returns is_blurry plus the Laplacian variance.
-    source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#detect_blur_v1_utils_detect_blur_post
-    method: POST
-    path: /v1/utils/detect-blur
-    auth_required: true
-  - name: get_device_label
-    description: >-
-      Retrieve the regulatory medical-device label: manufacturer, CE mark
-      class, UDI, version, eIFU pointer and UK responsible person.
-    source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#get_label_v1_label_get
-    method: GET
-    path: /v1/label
-    auth_required: false
-  - name: get_version
-    description: Return the API name and semantic version.
-    source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#get_version_version_get
-    method: GET
-    path: /version
-    auth_required: false
-  - name: get_health
-    description: Liveness/readiness check.
-    source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#get_health_health_get
-    method: GET
-    path: /health
-    auth_required: false
+- name: infer_diseases
+  description: Analyze a skin image and return the top 5 most probable skin conditions with confidence
+    scores and ICD-10 codes.
+  source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#infer_diseases_v1_v1_infer_diseases_v1_post
+  method: POST
+  path: /v1/infer-diseases/v1
+  auth_required: true
+  metered: true
+  inputs:
+    image: multipart file (required) — min 224x224, JPEG/PNG/WebP/DICOM and others
+    include_skin_tone: boolean query param, default false
+    require_anonymous: boolean query param, default false
+- name: get_disease_catalog
+  description: Fetch the static disease catalog mapping ICD-10 codes to localized names, layman's names
+    and read-more links in en/fr/de/it/es/sv/zh. Fetch once and cache.
+  source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#get_disease_catalog_v1_v1_infer_diseases_v1_diseases_get
+  method: GET
+  path: /v1/infer-diseases/v1/diseases
+  auth_required: true
+  caching: static per model version — do not call at runtime
+- name: infer_skin_tone
+  description: Classify the Fitzpatrick skin type (1-6) of a skin image.
+  source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#infer_skin_tone_v1_v1_infer_skin_tone_v1_post
+  method: POST
+  path: /v1/infer-skin-tone/v1
+  auth_required: true
+- name: infer_genitals
+  description: Binary classifier flagging whether an image contains genitalia. A content safety pre-check.
+  source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#infer_genitals_v1_v1_infer_genitals_v1_post
+  method: POST
+  path: /v1/infer-genitals/v1
+  auth_required: true
+- name: infer_age
+  description: Predict the age in years of the subject in an image.
+  source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#infer_age_v1_v1_infer_age_v1_post
+  method: POST
+  path: /v1/infer-age/v1
+  auth_required: false
+  note: Declared with no security requirement in the published spec, unlike every sibling inference operation.
+    Recorded as a spec inconsistency; see authentication/#spec_gap.
+- name: detect_blur
+  description: Screen an image for blur before spending a metered inference call. Returns is_blurry plus
+    the Laplacian variance.
+  source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#detect_blur_v1_utils_detect_blur_post
+  method: POST
+  path: /v1/utils/detect-blur
+  auth_required: true
+- name: get_device_label
+  description: 'Retrieve the regulatory medical-device label: manufacturer, CE mark class, UDI, version,
+    eIFU pointer and UK responsible person.'
+  source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#get_label_v1_label_get
+  method: GET
+  path: /v1/label
+  auth_required: false
+- name: get_version
+  description: Return the API name and semantic version.
+  source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#get_version_version_get
+  method: GET
+  path: /version
+  auth_required: false
+- name: get_health
+  description: Liveness/readiness check.
+  source_operation: openapi/autoderm-ai-dermatology-api-openapi.yml#get_health_health_get
+  method: GET
+  path: /health
+  auth_required: false
 coverage:
   rest_operations_total: 17
   rest_operations_deduplicated: 9
   tools_derived: 9
-  note: >-
-    The spec exposes the same health/version handlers at both root and
-    /v1/system/ paths, and registers HEAD alongside GET on the health routes;
-    those duplicates collapse into one tool each.
+  note: The spec exposes the same health/version handlers at both root and /v1/system/ paths, and registers
+    HEAD alongside GET on the health routes; those duplicates collapse into one tool each.
+deployment:
+  mode: none
+  verified: derived
+  tools: 9
+  checked: '2026-08-12'
+  source: catalog MCP census
