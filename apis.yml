@@ -19,6 +19,25 @@ specificationVersion: '0.23'
 tags:
   - dermatology-api
   - ai-dermatology
+  - Medical Imaging
+  - Telemedicine
+  - skin-analysis
+  - REST API
+  - OpenAPI
+  - llms-txt
+  - ce-marked
+  - White Label
+  - Healthcare
+  - Medical AI
+  - Computer-Vision
+  - Medical Device
+  - ICD-10
+  - image-classification
+  - Clinical Decision Support
+  - triage
+tags_raw:
+  - dermatology-api
+  - ai-dermatology
   - medical-imaging
   - telemedicine
   - skin-analysis
@@ -42,6 +61,8 @@ apis:
   humanURL: https://docs.autoderm.ai/en
   baseURL: https://api.autoderm.ai
   tags:
+  - Device
+  tags_raw:
   - device
   properties:
   - type: OpenAPI
@@ -62,6 +83,8 @@ apis:
   humanURL: https://docs.autoderm.ai/en
   baseURL: https://api.autoderm.ai
   tags:
+  - Inference
+  tags_raw:
   - inference
   properties:
   - type: OpenAPI
@@ -82,6 +105,8 @@ apis:
   humanURL: https://docs.autoderm.ai/en
   baseURL: https://api.autoderm.ai
   tags:
+  - System
+  tags_raw:
   - system
   properties:
   - type: OpenAPI
@@ -102,6 +127,8 @@ apis:
   humanURL: https://docs.autoderm.ai/en
   baseURL: https://api.autoderm.ai
   tags:
+  - Utils
+  tags_raw:
   - utils
   properties:
   - type: OpenAPI
