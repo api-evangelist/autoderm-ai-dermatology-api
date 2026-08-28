@@ -12,6 +12,18 @@ description: >-
   telemedicine, pharmacy, and digital health platforms as a decision-support and triage tool, and is
   explicitly not intended as a means of diagnosis.
 url: https://raw.githubusercontent.com/api-evangelist/autoderm-ai-dermatology-api/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://autoderm.ai/wp-content/uploads/2026/05/autoderm-logo.svg
 created: '2026-08-07'
 modified: '2026-08-09'
