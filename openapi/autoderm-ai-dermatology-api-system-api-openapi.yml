@@ -6,12 +6,12 @@ servers:
 - url: https://api.autoderm.ai
   description: Autoderm API Server (prod)
 tags:
-- name: system
+- name: System
 paths:
   /healthz:
     get:
       tags:
-      - system
+      - System
       summary: Get Health
       description: 'Health check endpoint for the API.
 
@@ -29,7 +29,7 @@ paths:
                 title: Response Get Health Healthz Get
     head:
       tags:
-      - system
+      - System
       summary: Get Health
       description: 'Health check endpoint for the API.
 
@@ -48,7 +48,7 @@ paths:
   /health:
     get:
       tags:
-      - system
+      - System
       summary: Get Health
       description: 'Health check endpoint for the API.
 
@@ -66,7 +66,7 @@ paths:
                 title: Response Get Health Health Get
     head:
       tags:
-      - system
+      - System
       summary: Get Health
       description: 'Health check endpoint for the API.
 
@@ -85,7 +85,7 @@ paths:
   /version:
     get:
       tags:
-      - system
+      - System
       summary: Get Version
       description: Return the global app name and version.
       operationId: get_version_version_get
@@ -99,7 +99,7 @@ paths:
   /v1/system/healthz:
     get:
       tags:
-      - system
+      - System
       summary: Get Health
       description: 'Health check endpoint for the API.
 
@@ -117,7 +117,7 @@ paths:
                 title: Response Get Health V1 System Healthz Get
     head:
       tags:
-      - system
+      - System
       summary: Get Health
       description: 'Health check endpoint for the API.
 
@@ -136,7 +136,7 @@ paths:
   /v1/system/health:
     get:
       tags:
-      - system
+      - System
       summary: Get Health
       description: 'Health check endpoint for the API.
 
@@ -154,7 +154,7 @@ paths:
                 title: Response Get Health V1 System Health Get
     head:
       tags:
-      - system
+      - System
       summary: Get Health
       description: 'Health check endpoint for the API.
 
@@ -173,7 +173,7 @@ paths:
   /v1/system/version:
     get:
       tags:
-      - system
+      - System
       summary: Get Version
       description: Return the global app name and version.
       operationId: get_version_v1_system_version_get

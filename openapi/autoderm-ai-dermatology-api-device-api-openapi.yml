@@ -6,12 +6,12 @@ servers:
 - url: https://api.autoderm.ai
   description: Autoderm API Server (prod)
 tags:
-- name: device
+- name: Device
 paths:
   /v1/label:
     get:
       tags:
-      - device
+      - Device
       summary: Get Label
       description: Return the medical device label.
       operationId: get_label_v1_label_get

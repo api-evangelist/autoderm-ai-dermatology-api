@@ -1,10 +1,7 @@
 {
   "provider": "autoderm-ai-dermatology-api",
   "sources": [
-    "autoderm-ai-dermatology-api-device-api-openapi.yml",
-    "autoderm-ai-dermatology-api-inference-api-openapi.yml",
-    "autoderm-ai-dermatology-api-system-api-openapi.yml",
-    "autoderm-ai-dermatology-api-utils-api-openapi.yml"
+    "_original/autoderm-ai-dermatology-api-openapi.json"
   ],
   "outputs": [
     "autoderm-ai-dermatology-api-device-api-openapi.yml",
@@ -16,11 +13,20 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "autoderm-ai-dermatology-api-device-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "autoderm-ai-dermatology-api-inference-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "autoderm-ai-dermatology-api-system-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "autoderm-ai-dermatology-api-utils-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "autoderm-ai-dermatology-api-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "autoderm-ai-dermatology-api-openapi.json: declared missing tag: device",
+    "autoderm-ai-dermatology-api-openapi.json: declared missing tag: inference",
+    "autoderm-ai-dermatology-api-openapi.json: declared missing tag: system",
+    "autoderm-ai-dermatology-api-openapi.json: declared missing tag: utils",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "_original/autoderm-ai-dermatology-api-openapi.yml: archived document superseded by a larger archived document",
+    "autoderm-ai-dermatology-api-device-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autoderm-ai-dermatology-api-inference-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autoderm-ai-dermatology-api-system-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "autoderm-ai-dermatology-api-utils-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

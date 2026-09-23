@@ -6,12 +6,12 @@ servers:
 - url: https://api.autoderm.ai
   description: Autoderm API Server (prod)
 tags:
-- name: inference
+- name: Inference
 paths:
   /v1/infer-genitals/v1:
     post:
       tags:
-      - inference
+      - Inference
       summary: Infer Genitals V1
       description: 'Analyze an image to determine if it contains genitalia.
 
@@ -52,7 +52,7 @@ paths:
   /v1/infer-age/v1:
     post:
       tags:
-      - inference
+      - Inference
       summary: Infer Age V1
       description: 'Analyze an image and return the predicted age of the subject.
 
@@ -81,7 +81,7 @@ paths:
   /v1/infer-diseases/v1:
     post:
       tags:
-      - inference
+      - Inference
       summary: Infer Diseases V1
       description: 'Analyze an image and return the top 5 most probable skin diseases detected, using the AutoDerm v2.2 model.
 
@@ -137,7 +137,7 @@ paths:
   /v1/infer-diseases/v1/diseases:
     get:
       tags:
-      - inference
+      - Inference
       summary: Get Disease Catalog V1
       description: 'Return the complete list of diseases the model can predict.
 
@@ -161,7 +161,7 @@ paths:
   /v1/infer-skin-tone/v1:
     post:
       tags:
-      - inference
+      - Inference
       summary: Infer Skin Tone V1
       description: Analyze an image to determine the Fitzpatrick skin type.
       operationId: infer_skin_tone_v1_v1_infer_skin_tone_v1_post
@@ -198,7 +198,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post:
+    Body_infer_genitals_v1_v1_infer_genitals_v1_post:
       properties:
         image:
           type: string
@@ -208,16 +208,33 @@ components:
       type: object
       required:
       - image
-      title: Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post
-    HTTPValidationError:
+      title: Body_infer_genitals_v1_v1_infer_genitals_v1_post
+    ValidationError:
       properties:
-        detail:
+        loc:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Detail
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
-      title: HTTPValidationError
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     BooleanAnalysis:
       properties:
         prediction:
@@ -235,70 +252,14 @@ components:
       - prediction
       - confidence
       title: BooleanAnalysis
-    DiseasePrediction:
-      properties:
-        disease:
-          type: string
-          title: Disease
-          description: Disease label, see disease catalog for details
-        confidence:
-          type: number
-          maximum: 1.0
-          minimum: 0.0
-          title: Confidence
-          description: Prediction confidence score
-        icd_10:
-          type: string
-          title: Icd 10
-          description: ICD-10 code for the disease
-        name:
-          type: string
-          title: Name
-          description: Disease name in English language, see disease catalog for details
-      type: object
-      required:
-      - disease
-      - confidence
-      - icd_10
-      - name
-      title: DiseasePrediction
-    SkinToneModelResponse:
-      properties:
-        fitzpatrick:
-          type: integer
-          maximum: 6.0
-          minimum: 1.0
-          title: Fitzpatrick
-          description: Fitzpatrick skin type classification (1 is lightest and 6 is darkest)
-        confidence:
-          type: number
-          maximum: 1.0
-          minimum: 0.0
-          title: Confidence
-          description: Prediction confidence score
-      type: object
-      required:
-      - fitzpatrick
-      - confidence
-      title: SkinToneModelResponse
-    DiseaseModelResponse:
-      properties:
-        predictions:
-          items:
-            $ref: '#/components/schemas/DiseasePrediction'
-          type: array
-          title: Predictions
-          description: List of disease predictions
-        skin_tone:
-          anyOf:
-          - $ref: '#/components/schemas/SkinToneModelResponse'
-          - type: 'null'
-          description: Fitzpatrick skin type classification
-      type: object
-      required:
-      - predictions
-      title: DiseaseModelResponse
-    Body_infer_genitals_v1_v1_infer_genitals_v1_post:
+    DiseaseCategory:
+      type: string
+      enum:
+      - GENITAL
+      - BODY
+      title: DiseaseCategory
+      description: Categorization tags for diseases.
+    Body_infer_age_v1_v1_infer_age_v1_post:
       properties:
         image:
           type: string
@@ -308,7 +269,18 @@ components:
       type: object
       required:
       - image
-      title: Body_infer_genitals_v1_v1_infer_genitals_v1_post
+      title: Body_infer_age_v1_v1_infer_age_v1_post
+    Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post:
+      properties:
+        image:
+          type: string
+          contentMediaType: application/octet-stream
+          title: Image
+          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
+      type: object
+      required:
+      - image
+      title: Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post
     DiseaseCatalogEntry:
       properties:
         icd_10:
@@ -357,6 +329,70 @@ components:
       - sv
       - zh
       title: DiseaseCatalogEntry
+    DiseasePrediction:
+      properties:
+        disease:
+          type: string
+          title: Disease
+          description: Disease label, see disease catalog for details
+        confidence:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Confidence
+          description: Prediction confidence score
+        icd_10:
+          type: string
+          title: Icd 10
+          description: ICD-10 code for the disease
+        name:
+          type: string
+          title: Name
+          description: Disease name in English language, see disease catalog for details
+      type: object
+      required:
+      - disease
+      - confidence
+      - icd_10
+      - name
+      title: DiseasePrediction
+    DiseaseModelResponse:
+      properties:
+        predictions:
+          items:
+            $ref: '#/components/schemas/DiseasePrediction'
+          type: array
+          title: Predictions
+          description: List of disease predictions
+        skin_tone:
+          anyOf:
+          - $ref: '#/components/schemas/SkinToneModelResponse'
+          - type: 'null'
+          description: Fitzpatrick skin type classification
+      type: object
+      required:
+      - predictions
+      title: DiseaseModelResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    AgeModelResponse:
+      properties:
+        age:
+          type: number
+          minimum: 0.0
+          title: Age
+          description: Predicted age of the subject in years
+      type: object
+      required:
+      - age
+      title: AgeModelResponse
     Body_infer_diseases_v1_v1_infer_diseases_v1_post:
       properties:
         image:
@@ -368,13 +404,25 @@ components:
       required:
       - image
       title: Body_infer_diseases_v1_v1_infer_diseases_v1_post
-    DiseaseCategory:
-      type: string
-      enum:
-      - GENITAL
-      - BODY
-      title: DiseaseCategory
-      description: Categorization tags for diseases.
+    SkinToneModelResponse:
+      properties:
+        fitzpatrick:
+          type: integer
+          maximum: 6.0
+          minimum: 1.0
+          title: Fitzpatrick
+          description: Fitzpatrick skin type classification (1 is lightest and 6 is darkest)
+        confidence:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Confidence
+          description: Prediction confidence score
+      type: object
+      required:
+      - fitzpatrick
+      - confidence
+      title: SkinToneModelResponse
     DiseaseCatalogLocalizedEntry:
       properties:
         name:
@@ -396,54 +444,6 @@ components:
       - simple_name
       - read_more_url
       title: DiseaseCatalogLocalizedEntry
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    AgeModelResponse:
-      properties:
-        age:
-          type: number
-          minimum: 0.0
-          title: Age
-          description: Predicted age of the subject in years
-      type: object
-      required:
-      - age
-      title: AgeModelResponse
-    Body_infer_age_v1_v1_infer_age_v1_post:
-      properties:
-        image:
-          type: string
-          contentMediaType: application/octet-stream
-          title: Image
-          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
-      type: object
-      required:
-      - image
-      title: Body_infer_age_v1_v1_infer_age_v1_post
   securitySchemes:
     HTTPBearer:
       type: http
