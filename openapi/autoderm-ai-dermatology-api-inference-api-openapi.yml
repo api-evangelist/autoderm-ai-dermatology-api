@@ -198,89 +198,27 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    Body_infer_genitals_v1_v1_infer_genitals_v1_post:
+    DiseaseCatalogLocalizedEntry:
       properties:
-        image:
+        name:
           type: string
-          contentMediaType: application/octet-stream
-          title: Image
-          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
+          title: Name
+        simple_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Simple Name
+        read_more_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Read More Url
       type: object
       required:
-      - image
-      title: Body_infer_genitals_v1_v1_infer_genitals_v1_post
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    BooleanAnalysis:
-      properties:
-        prediction:
-          type: boolean
-          title: Prediction
-          description: Model prediction
-        confidence:
-          type: number
-          maximum: 1.0
-          minimum: 0.0
-          title: Confidence
-          description: Prediction confidence score
-      type: object
-      required:
-      - prediction
-      - confidence
-      title: BooleanAnalysis
-    DiseaseCategory:
-      type: string
-      enum:
-      - GENITAL
-      - BODY
-      title: DiseaseCategory
-      description: Categorization tags for diseases.
-    Body_infer_age_v1_v1_infer_age_v1_post:
-      properties:
-        image:
-          type: string
-          contentMediaType: application/octet-stream
-          title: Image
-          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
-      type: object
-      required:
-      - image
-      title: Body_infer_age_v1_v1_infer_age_v1_post
-    Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post:
-      properties:
-        image:
-          type: string
-          contentMediaType: application/octet-stream
-          title: Image
-          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
-      type: object
-      required:
-      - image
-      title: Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post
+      - name
+      - simple_name
+      - read_more_url
+      title: DiseaseCatalogLocalizedEntry
     DiseaseCatalogEntry:
       properties:
         icd_10:
@@ -329,6 +267,23 @@ components:
       - sv
       - zh
       title: DiseaseCatalogEntry
+    DiseaseModelResponse:
+      properties:
+        predictions:
+          items:
+            $ref: '#/components/schemas/DiseasePrediction'
+          type: array
+          title: Predictions
+          description: List of disease predictions
+        skin_tone:
+          anyOf:
+          - $ref: '#/components/schemas/SkinToneModelResponse'
+          - type: 'null'
+          description: Fitzpatrick skin type classification
+      type: object
+      required:
+      - predictions
+      title: DiseaseModelResponse
     DiseasePrediction:
       properties:
         disease:
@@ -356,43 +311,24 @@ components:
       - icd_10
       - name
       title: DiseasePrediction
-    DiseaseModelResponse:
+    Body_infer_genitals_v1_v1_infer_genitals_v1_post:
       properties:
-        predictions:
-          items:
-            $ref: '#/components/schemas/DiseasePrediction'
-          type: array
-          title: Predictions
-          description: List of disease predictions
-        skin_tone:
-          anyOf:
-          - $ref: '#/components/schemas/SkinToneModelResponse'
-          - type: 'null'
-          description: Fitzpatrick skin type classification
+        image:
+          type: string
+          contentMediaType: application/octet-stream
+          title: Image
+          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
       type: object
       required:
-      - predictions
-      title: DiseaseModelResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    AgeModelResponse:
-      properties:
-        age:
-          type: number
-          minimum: 0.0
-          title: Age
-          description: Predicted age of the subject in years
-      type: object
-      required:
-      - age
-      title: AgeModelResponse
+      - image
+      title: Body_infer_genitals_v1_v1_infer_genitals_v1_post
+    DiseaseCategory:
+      type: string
+      enum:
+      - GENITAL
+      - BODY
+      title: DiseaseCategory
+      description: Categorization tags for diseases.
     Body_infer_diseases_v1_v1_infer_diseases_v1_post:
       properties:
         image:
@@ -404,6 +340,26 @@ components:
       required:
       - image
       title: Body_infer_diseases_v1_v1_infer_diseases_v1_post
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post:
+      properties:
+        image:
+          type: string
+          contentMediaType: application/octet-stream
+          title: Image
+          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
+      type: object
+      required:
+      - image
+      title: Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post
     SkinToneModelResponse:
       properties:
         fitzpatrick:
@@ -423,27 +379,71 @@ components:
       - fitzpatrick
       - confidence
       title: SkinToneModelResponse
-    DiseaseCatalogLocalizedEntry:
+    Body_infer_age_v1_v1_infer_age_v1_post:
       properties:
-        name:
+        image:
           type: string
-          title: Name
-        simple_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Simple Name
-        read_more_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Read More Url
+          contentMediaType: application/octet-stream
+          title: Image
+          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
       type: object
       required:
-      - name
-      - simple_name
-      - read_more_url
-      title: DiseaseCatalogLocalizedEntry
+      - image
+      title: Body_infer_age_v1_v1_infer_age_v1_post
+    BooleanAnalysis:
+      properties:
+        prediction:
+          type: boolean
+          title: Prediction
+          description: Model prediction
+        confidence:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Confidence
+          description: Prediction confidence score
+      type: object
+      required:
+      - prediction
+      - confidence
+      title: BooleanAnalysis
+    AgeModelResponse:
+      properties:
+        age:
+          type: number
+          minimum: 0.0
+          title: Age
+          description: Predicted age of the subject in years
+      type: object
+      required:
+      - age
+      title: AgeModelResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http
