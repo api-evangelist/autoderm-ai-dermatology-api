@@ -219,6 +219,146 @@ components:
       - simple_name
       - read_more_url
       title: DiseaseCatalogLocalizedEntry
+    BooleanAnalysis:
+      properties:
+        prediction:
+          type: boolean
+          title: Prediction
+          description: Model prediction
+        confidence:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Confidence
+          description: Prediction confidence score
+      type: object
+      required:
+      - prediction
+      - confidence
+      title: BooleanAnalysis
+    DiseaseCategory:
+      type: string
+      enum:
+      - GENITAL
+      - BODY
+      title: DiseaseCategory
+      description: Categorization tags for diseases.
+    Body_infer_age_v1_v1_infer_age_v1_post:
+      properties:
+        image:
+          type: string
+          contentMediaType: application/octet-stream
+          title: Image
+          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
+      type: object
+      required:
+      - image
+      title: Body_infer_age_v1_v1_infer_age_v1_post
+    SkinToneModelResponse:
+      properties:
+        fitzpatrick:
+          type: integer
+          maximum: 6.0
+          minimum: 1.0
+          title: Fitzpatrick
+          description: Fitzpatrick skin type classification (1 is lightest and 6 is darkest)
+        confidence:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Confidence
+          description: Prediction confidence score
+      type: object
+      required:
+      - fitzpatrick
+      - confidence
+      title: SkinToneModelResponse
+    Body_infer_diseases_v1_v1_infer_diseases_v1_post:
+      properties:
+        image:
+          type: string
+          contentMediaType: application/octet-stream
+          title: Image
+          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
+      type: object
+      required:
+      - image
+      title: Body_infer_diseases_v1_v1_infer_diseases_v1_post
+    DiseasePrediction:
+      properties:
+        disease:
+          type: string
+          title: Disease
+          description: Disease label, see disease catalog for details
+        confidence:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Confidence
+          description: Prediction confidence score
+        icd_10:
+          type: string
+          title: Icd 10
+          description: ICD-10 code for the disease
+        name:
+          type: string
+          title: Name
+          description: Disease name in English language, see disease catalog for details
+      type: object
+      required:
+      - disease
+      - confidence
+      - icd_10
+      - name
+      title: DiseasePrediction
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    DiseaseModelResponse:
+      properties:
+        predictions:
+          items:
+            $ref: '#/components/schemas/DiseasePrediction'
+          type: array
+          title: Predictions
+          description: List of disease predictions
+        skin_tone:
+          anyOf:
+          - $ref: '#/components/schemas/SkinToneModelResponse'
+          - type: 'null'
+          description: Fitzpatrick skin type classification
+      type: object
+      required:
+      - predictions
+      title: DiseaseModelResponse
+    Body_infer_genitals_v1_v1_infer_genitals_v1_post:
+      properties:
+        image:
+          type: string
+          contentMediaType: application/octet-stream
+          title: Image
+          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
+      type: object
+      required:
+      - image
+      title: Body_infer_genitals_v1_v1_infer_genitals_v1_post
+    Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post:
+      properties:
+        image:
+          type: string
+          contentMediaType: application/octet-stream
+          title: Image
+          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
+      type: object
+      required:
+      - image
+      title: Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post
     DiseaseCatalogEntry:
       properties:
         icd_10:
@@ -267,157 +407,6 @@ components:
       - sv
       - zh
       title: DiseaseCatalogEntry
-    DiseaseModelResponse:
-      properties:
-        predictions:
-          items:
-            $ref: '#/components/schemas/DiseasePrediction'
-          type: array
-          title: Predictions
-          description: List of disease predictions
-        skin_tone:
-          anyOf:
-          - $ref: '#/components/schemas/SkinToneModelResponse'
-          - type: 'null'
-          description: Fitzpatrick skin type classification
-      type: object
-      required:
-      - predictions
-      title: DiseaseModelResponse
-    DiseasePrediction:
-      properties:
-        disease:
-          type: string
-          title: Disease
-          description: Disease label, see disease catalog for details
-        confidence:
-          type: number
-          maximum: 1.0
-          minimum: 0.0
-          title: Confidence
-          description: Prediction confidence score
-        icd_10:
-          type: string
-          title: Icd 10
-          description: ICD-10 code for the disease
-        name:
-          type: string
-          title: Name
-          description: Disease name in English language, see disease catalog for details
-      type: object
-      required:
-      - disease
-      - confidence
-      - icd_10
-      - name
-      title: DiseasePrediction
-    Body_infer_genitals_v1_v1_infer_genitals_v1_post:
-      properties:
-        image:
-          type: string
-          contentMediaType: application/octet-stream
-          title: Image
-          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
-      type: object
-      required:
-      - image
-      title: Body_infer_genitals_v1_v1_infer_genitals_v1_post
-    DiseaseCategory:
-      type: string
-      enum:
-      - GENITAL
-      - BODY
-      title: DiseaseCategory
-      description: Categorization tags for diseases.
-    Body_infer_diseases_v1_v1_infer_diseases_v1_post:
-      properties:
-        image:
-          type: string
-          contentMediaType: application/octet-stream
-          title: Image
-          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
-      type: object
-      required:
-      - image
-      title: Body_infer_diseases_v1_v1_infer_diseases_v1_post
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post:
-      properties:
-        image:
-          type: string
-          contentMediaType: application/octet-stream
-          title: Image
-          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
-      type: object
-      required:
-      - image
-      title: Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post
-    SkinToneModelResponse:
-      properties:
-        fitzpatrick:
-          type: integer
-          maximum: 6.0
-          minimum: 1.0
-          title: Fitzpatrick
-          description: Fitzpatrick skin type classification (1 is lightest and 6 is darkest)
-        confidence:
-          type: number
-          maximum: 1.0
-          minimum: 0.0
-          title: Confidence
-          description: Prediction confidence score
-      type: object
-      required:
-      - fitzpatrick
-      - confidence
-      title: SkinToneModelResponse
-    Body_infer_age_v1_v1_infer_age_v1_post:
-      properties:
-        image:
-          type: string
-          contentMediaType: application/octet-stream
-          title: Image
-          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
-      type: object
-      required:
-      - image
-      title: Body_infer_age_v1_v1_infer_age_v1_post
-    BooleanAnalysis:
-      properties:
-        prediction:
-          type: boolean
-          title: Prediction
-          description: Model prediction
-        confidence:
-          type: number
-          maximum: 1.0
-          minimum: 0.0
-          title: Confidence
-          description: Prediction confidence score
-      type: object
-      required:
-      - prediction
-      - confidence
-      title: BooleanAnalysis
-    AgeModelResponse:
-      properties:
-        age:
-          type: number
-          minimum: 0.0
-          title: Age
-          description: Predicted age of the subject in years
-      type: object
-      required:
-      - age
-      title: AgeModelResponse
     ValidationError:
       properties:
         loc:
@@ -444,6 +433,17 @@ components:
       - msg
       - type
       title: ValidationError
+    AgeModelResponse:
+      properties:
+        age:
+          type: number
+          minimum: 0.0
+          title: Age
+          description: Predicted age of the subject in years
+      type: object
+      required:
+      - age
+      title: AgeModelResponse
   securitySchemes:
     HTTPBearer:
       type: http
