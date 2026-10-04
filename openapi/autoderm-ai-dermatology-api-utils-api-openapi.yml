@@ -55,32 +55,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    DetectBlurResponse:
-      properties:
-        is_blurry:
-          type: boolean
-          title: Is Blurry
-          description: True if the image is considered blurry
-        variance:
-          type: number
-          title: Variance
-          description: The computed variance of the Laplacian (blur metric)
-      type: object
-      required:
-      - is_blurry
-      - variance
-      title: DetectBlurResponse
-    Body_detect_blur_v1_utils_detect_blur_post:
-      properties:
-        image:
-          type: string
-          contentMediaType: application/octet-stream
-          title: Image
-          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
-      type: object
-      required:
-      - image
-      title: Body_detect_blur_v1_utils_detect_blur_post
     ValidationError:
       properties:
         loc:
@@ -116,6 +90,32 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    DetectBlurResponse:
+      properties:
+        is_blurry:
+          type: boolean
+          title: Is Blurry
+          description: True if the image is considered blurry
+        variance:
+          type: number
+          title: Variance
+          description: The computed variance of the Laplacian (blur metric)
+      type: object
+      required:
+      - is_blurry
+      - variance
+      title: DetectBlurResponse
+    Body_detect_blur_v1_utils_detect_blur_post:
+      properties:
+        image:
+          type: string
+          contentMediaType: application/octet-stream
+          title: Image
+          description: 'Image file to upload. Maximum size: 10.00 MB. Minimum resolution: 224x224. Supported formats: JPEG, PNG, BMP, GIF, TIFF, PPM, PGM, PBM, WebP, DICOM.'
+      type: object
+      required:
+      - image
+      title: Body_detect_blur_v1_utils_detect_blur_post
   securitySchemes:
     HTTPBearer:
       type: http
