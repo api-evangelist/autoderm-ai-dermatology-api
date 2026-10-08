@@ -98,3 +98,37 @@ notes:
   - >-
     The SLA applies only to Basic and Enterprise customers; Trial usage carries
     no uptime commitment.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - negotiated
+  - subscription
+  units: []
+  plans:
+  - name: Trial
+    access: free
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods:
+    - one-time
+  - name: Basic
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - other
+    periods:
+    - month
+    - per-use
+  - name: Enterprise
+    access: negotiated
+    model: negotiated
+    model_how: stated
+    units:
+    - other
+    periods:
+    - month
