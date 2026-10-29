@@ -1,4 +1,4 @@
-# Autoderm – AI Dermatology API (autoderm-ai-dermatology-api)
+# Autoderm – AI Dermatology API
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,163 +66,169 @@
 
 Autoderm is a white-label REST API for AI-assisted analysis of dermatological images, operated as a regulated medical device. A client POSTs a single skin photograph as multipart/form-data and receives the top five most probable conditions, each with a confidence score between 0 and 1, an ICD-10 code and an English name; a companion static catalog maps every ICD-10 code to localized and layman's names plus read-more links in seven languages. Alongside disease detection the API exposes Fitzpatrick skin-type classification, a blur/image-quality screen, a genitalia content-safety classifier, an age estimator, and — unusually — the regulatory device label itself as a live anonymous endpoint. Autoderm is CE-marked under EU MDD 93/42/EEC as a legacy Class I device, is transitioning to MDR Class IIa under EU MDR 2017/745, and holds FDA Breakthrough Device Designation. It is sold into telemedicine, pharmacy, and digital health platforms as a decision-support and triage tool, and is explicitly not intended as a means of diagnosis.
 
-**APIs.json:** [https://autoderm-ai-dermatology-api.apievangelist.com/apis.yml](https://autoderm-ai-dermatology-api.apievangelist.com/apis.yml)
+**Areas:** dermatology-api · ai-dermatology · Medical Imaging · Telehealth · skin-analysis · REST API · OpenAPI · llms-txt · ce-marked · White Label · Healthcare · Medical AI
 
-## Tags
+## Autoderm – AI Dermatology API on APIs.io
 
-- dermatology-api
-- ai-dermatology
-- medical-imaging
-- telemedicine
-- skin-analysis
-- rest-api
-- openapi
-- llms-txt
-- ce-marked
-- white-label
-- healthcare
-- medical-ai
-- computer-vision
-- medical-device
-- icd-10
-- image-classification
-- clinical-decision-support
-- triage
+Everything profiled for Autoderm – AI Dermatology API is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/autoderm-ai-dermatology-api/](https://apis.io/providers/autoderm-ai-dermatology-api/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (4)
 
-- **Created:** 2026-08-07
-- **Modified:** 2026-08-09
+- [Autoderm – AI Dermatology API Device API](https://apis.io/apis/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-device-api/) — The device API from Autoderm – AI Dermatology API — 1 operation(s) for device.
+- [Autoderm – AI Dermatology API Inference API](https://apis.io/apis/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-inference-api/) — The inference API from Autoderm – AI Dermatology API — 5 operation(s) for inference.
+- [Autoderm – AI Dermatology API System API](https://apis.io/apis/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-system-api/) — The system API from Autoderm – AI Dermatology API — 6 operation(s) for system.
+- [Autoderm – AI Dermatology API Utils API](https://apis.io/apis/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-utils-api/) — The utils API from Autoderm – AI Dermatology API — 1 operation(s) for utils.
 
-## APIs
+### Published properties
 
-### Autoderm – AI Dermatology API Device API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The device API from Autoderm – AI Dermatology API — 1 operation(s) for device.
+#### MCP servers (1)
 
-- **Human URL:** [https://docs.autoderm.ai/en](https://docs.autoderm.ai/en)
-- **Base URL:** `https://api.autoderm.ai`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [autoderm](https://apis.io/servers/autoderm-ai-dermatology-api/autoderm/)
 
-- device
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [OpenAPI](openapi/autoderm-ai-dermatology-api-device-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/autoderm-ai-dermatology-api-device-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/autoderm-ai-dermatology-api-device-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Open A P I  Source](https://api.autoderm.ai/openapi.json)
-- [Documentation](https://docs.autoderm.ai/en)
-- [API Reference](https://docs.autoderm.ai/en/api-reference)
-- [Getting Started](https://docs.autoderm.ai/en/getting-started/getting-started)
-- [L L M S Txt](https://autoderm.ai/llms.txt)
+- [Autoderm Ai Dermatology Api Agentic Access](https://apis.io/agentic-access/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-agentic-access/)
 
-### Autoderm – AI Dermatology API Inference API
+#### JSON Schema (18)
 
-The inference API from Autoderm – AI Dermatology API — 5 operation(s) for inference.
+The data models the API reads and writes.
 
-- **Human URL:** [https://docs.autoderm.ai/en](https://docs.autoderm.ai/en)
-- **Base URL:** `https://api.autoderm.ai`
+- [AgeModelResponse](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-AgeModelResponse/)
+- [Body_detect_blur_v1_utils_detect_blur_post](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-Body_detect_blur_v1_utils_detect_blur_post/)
+- [Body_infer_age_v1_v1_infer_age_v1_post](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-Body_infer_age_v1_v1_infer_age_v1_post/)
+- [Body_infer_diseases_v1_v1_infer_diseases_v1_post](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-Body_infer_diseases_v1_v1_infer_diseases_v1_post/)
+- [Body_infer_genitals_v1_v1_infer_genitals_v1_post](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-Body_infer_genitals_v1_v1_infer_genitals_v1_post/)
+- [Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-Body_infer_skin_tone_v1_v1_infer_skin_tone_v1_post/)
+- [BooleanAnalysis](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-BooleanAnalysis/)
+- [DetectBlurResponse](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-DetectBlurResponse/)
+- [DiseaseCatalogEntry](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-DiseaseCatalogEntry/)
+- [DiseaseCatalogLocalizedEntry](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-DiseaseCatalogLocalizedEntry/)
+- [DiseaseCategory](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-DiseaseCategory/)
+- [DiseaseModelResponse](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-DiseaseModelResponse/)
+- [DiseasePrediction](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-DiseasePrediction/)
+- [HTTPValidationError](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-HTTPValidationError/)
+- [MedicalDeviceLabel](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-MedicalDeviceLabel/)
+- [SkinToneModelResponse](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-SkinToneModelResponse/)
+- [ValidationError](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-ValidationError/)
+- [Version](https://apis.io/schemas/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-Version/)
 
-#### Tags
+#### Examples (4)
 
-- inference
+Example requests and responses.
 
-#### Properties
+- [Autoderm Ai Dermatology Api Get Disease Catalog 401](https://apis.io/examples/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-get-disease-catalog-401/)
+- [Autoderm Ai Dermatology Api Get Health 200](https://apis.io/examples/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-get-health-200/)
+- [Autoderm Ai Dermatology Api Get Label 200](https://apis.io/examples/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-get-label-200/)
+- [Autoderm Ai Dermatology Api Get Version 200](https://apis.io/examples/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-get-version-200/)
 
-- [OpenAPI](openapi/autoderm-ai-dermatology-api-inference-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/autoderm-ai-dermatology-api-inference-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/autoderm-ai-dermatology-api-inference-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Open A P I  Source](https://api.autoderm.ai/openapi.json)
-- [Documentation](https://docs.autoderm.ai/en)
-- [API Reference](https://docs.autoderm.ai/en/api-reference)
-- [Getting Started](https://docs.autoderm.ai/en/getting-started/getting-started)
-- [L L M S Txt](https://autoderm.ai/llms.txt)
+#### Collections (4)
 
-### Autoderm – AI Dermatology API System API
+Postman and Open Collection request collections.
 
-The system API from Autoderm – AI Dermatology API — 6 operation(s) for system.
+- [Autoderm Device API](https://apis.io/collections/autoderm-ai-dermatology-api/open-autoderm-ai-dermatology-api-device-api/)
+- [Autoderm Inference API](https://apis.io/collections/autoderm-ai-dermatology-api/open-autoderm-ai-dermatology-api-inference-api/)
+- [Autoderm System API](https://apis.io/collections/autoderm-ai-dermatology-api/open-autoderm-ai-dermatology-api-system-api/)
+- [Autoderm Utils API](https://apis.io/collections/autoderm-ai-dermatology-api/open-autoderm-ai-dermatology-api-utils-api/)
 
-- **Human URL:** [https://docs.autoderm.ai/en](https://docs.autoderm.ai/en)
-- **Base URL:** `https://api.autoderm.ai`
+#### Overlays (1)
 
-#### Tags
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- system
+- [Autoderm Ai Dermatology Api Openapi Overlay](https://apis.io/overlays/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-openapi-overlay/)
 
-#### Properties
+#### Security (2)
 
-- [OpenAPI](openapi/autoderm-ai-dermatology-api-system-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/autoderm-ai-dermatology-api-system-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/autoderm-ai-dermatology-api-system-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Open A P I  Source](https://api.autoderm.ai/openapi.json)
-- [Documentation](https://docs.autoderm.ai/en)
-- [API Reference](https://docs.autoderm.ai/en/api-reference)
-- [Getting Started](https://docs.autoderm.ai/en/getting-started/getting-started)
-- [L L M S Txt](https://autoderm.ai/llms.txt)
+Authentication, trust centre, and vulnerability disclosure.
 
-### Autoderm – AI Dermatology API Utils API
+- [Autoderm Ai Dermatology Api Authentication](https://apis.io/security/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-authentication/)
+- [Autoderm Ai Dermatology Api Domain Security](https://apis.io/security/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-domain-security/)
 
-The utils API from Autoderm – AI Dermatology API — 1 operation(s) for utils.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://docs.autoderm.ai/en](https://docs.autoderm.ai/en)
-- **Base URL:** `https://api.autoderm.ai`
+Published plans, tiers and prices.
 
-#### Tags
+- [Autoderm Ai Dermatology Api Plans](https://apis.io/plans/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-plans/)
 
-- utils
+#### Rate limits (1)
 
-#### Properties
+Published request limits.
 
-- [OpenAPI](openapi/autoderm-ai-dermatology-api-utils-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/autoderm-ai-dermatology-api-utils-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/autoderm-ai-dermatology-api-utils-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Open A P I  Source](https://api.autoderm.ai/openapi.json)
-- [Documentation](https://docs.autoderm.ai/en)
-- [API Reference](https://docs.autoderm.ai/en/api-reference)
-- [Getting Started](https://docs.autoderm.ai/en/getting-started/getting-started)
-- [L L M S Txt](https://autoderm.ai/llms.txt)
+- [Autoderm Ai Dermatology Api Rate Limits](https://apis.io/rate-limits/autoderm-ai-dermatology-api/autoderm-ai-dermatology-api-rate-limits/)
 
-## Common Properties
+## Where to find this API
 
-- [M C P Server](mcp/autoderm-ai-dermatology-api-mcp.yml)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://autoderm.ai/)
-- [Developer Portal](https://app.autoderm.ai)
 - [Documentation](https://docs.autoderm.ai/en)
-- [API Reference](https://docs.autoderm.ai/en/api-reference)
-- [Getting Started](https://docs.autoderm.ai/en/getting-started/getting-started)
+- [Getting started](https://docs.autoderm.ai/en/getting-started/getting-started)
+- [API reference](https://docs.autoderm.ai/en/api-reference)
+- [Pricing](https://autoderm.ai/pricing/)
+- [Sign up](https://app.autoderm.ai/en/auth/sign-up)
 - [Support](https://docs.autoderm.ai/en/support/support-contact)
 - [Blog](https://autoderm.ai/blog/)
-- [GitHub Organization](https://github.com/autodermai)
-- [Pricing](https://autoderm.ai/pricing/)
-- [Sign Up](https://app.autoderm.ai/en/auth/sign-up)
-- [Login](https://app.autoderm.ai/en/auth/login)
-- [Terms of Service](https://autoderm.ai/terms-of-service-autoderm/)
-- [Privacy Policy](https://autoderm.ai/privacy-policy/)
 - [Compliance](https://autoderm.ai/regulatory/)
-- [Deprecation](https://docs.autoderm.ai/en/support/api-versioning)
-- [Versioning](https://docs.autoderm.ai/en/support/api-versioning)
-- [Authentication](authentication/autoderm-ai-dermatology-api-authentication.yml)
-- [Conventions](conventions/autoderm-ai-dermatology-api-conventions.yml)
-- [Error Catalog](errors/autoderm-ai-dermatology-api-problem-types.yml)
-- [Lifecycle](lifecycle/autoderm-ai-dermatology-api-lifecycle.yml)
-- [Conformance](conformance/autoderm-ai-dermatology-api-conformance.yml)
-- [Data Model](data-model/autoderm-ai-dermatology-api-data-model.yml)
-- [Rate Limits](rate-limits/autoderm-ai-dermatology-api-rate-limits.yml)
-- [Plans](plans/autoderm-ai-dermatology-api-plans.yml)
-- [Packages](packages/autoderm-ai-dermatology-api-packages.yml)
-- [S D Ks](packages/autoderm-ai-dermatology-api-packages.yml)
-- [Examples](examples/_index.yml)
-- [JSON Schema](json-schema/) — [JSON Schema](https://json-schema.org/specification)
-- [Overlay](overlays/autoderm-ai-dermatology-api-openapi-overlay.yaml)
-- [L L Ms Txt](llms/autoderm-ai-dermatology-api-llms.txt)
-- [Agent Skill](skills/_index.yml)
-- [Agentic Access](agentic-access/autoderm-ai-dermatology-api-agentic-access.yml)
-- [Domain Security](security/autoderm-ai-dermatology-api-domain-security.yml)
+- [Terms of service](https://autoderm.ai/terms-of-service-autoderm/)
+- [Privacy policy](https://autoderm.ai/privacy-policy/)
+- [GitHub](https://github.com/autodermai)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Alexander Börve
-**Email:** support@autoderm.ai
-**URL:** https://autoderm.ai/
+**Kin Score 60.5** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 50.6 |
+| Contract governance | 18.2 |
+| Operational transparency | 57.9 |
+| Developer ergonomics | 66.1 |
+| Access clarity | 84.2 |
+
+**Agent readiness 27.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 22.1** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/autoderm-ai-dermatology-api/](https://apis.io/providers/autoderm-ai-dermatology-api/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Autoderm – AI Dermatology API: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/autoderm-ai-dermatology-api/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
