@@ -1,0 +1,70 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://autoderm.ai/pricing/
+sources:
+- https://autoderm.ai/pricing/
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T141238
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: per-call
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+  managed_tier: BASIC
+published: true
+note: Usage-based API pricing with free trial, $100/month Basic tier including 100 detections plus $1.00
+  per additional call, and custom Enterprise pricing.
+plan_count: 3
+currency: USD
+plans:
+- name: TRIAL
+  price_text: Free
+  period: none
+  unit: detections
+  included_quota: 5 one-time detections
+- name: BASIC
+  price_text: $ 100 per month · 100 detections
+  price: 100
+  currency: USD
+  period: month
+  unit: detections
+  included_quota: 100 detections
+  overage: + $1.00 / call after that
+- name: ENTERPRISE
+  price_text: Custom unlimited · custom pricing
+  period: none
+  included_quota: Unlimited API volume & custom pricing
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - hybrid
+  units: []
+  plans:
+  - name: TRIAL
+    access: other
+    model: unstated
+    model_how: derived
+    units:
+    - other
+    periods:
+    - none
+  - name: BASIC
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: ENTERPRISE
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
