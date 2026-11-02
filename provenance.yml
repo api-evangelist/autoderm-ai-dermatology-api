@@ -68,6 +68,9 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  heartbeat/2026-11-02.yml:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/autoderm-ai-dermatology-api-AgeModelResponse.json:
     method: unknown
     evidence: no authorship recorded
@@ -125,7 +128,7 @@ artifacts:
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-10-31T095417.yml:
+  kin/checks-2026-11-02T082323.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -182,6 +185,15 @@ artifacts:
   kin/score-2026-10-31T095417.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-11-01T171331.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-11-01T200237.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-11-02T082323.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   lifecycle/autoderm-ai-dermatology-api-lifecycle.yml:
     method: searched
     evidence: declared in the artifact
@@ -220,6 +232,9 @@ artifacts:
   packages/autoderm-ai-dermatology-api-packages.yml:
     method: searched
     evidence: declared in the artifact
+  patterns/autoderm-ai-dermatology-api-patterns.yml:
+    method: derived
+    evidence: declared in the artifact
   plans/autoderm-ai-dermatology-api-plans.yml:
     method: searched
     evidence: declared in the artifact
@@ -228,6 +243,9 @@ artifacts:
     evidence: no authorship recorded
   rate-limits/autoderm-ai-dermatology-api-rate-limits.yml:
     method: searched
+    evidence: declared in the artifact
+  rules/autoderm-ai-dermatology-api-rules.yml:
+    method: generated
     evidence: declared in the artifact
   security/autoderm-ai-dermatology-api-domain-security.yml:
     method: unknown
@@ -242,6 +260,9 @@ artifacts:
     method: generated
     evidence: declared in the artifact
   skills/autoderm-ai-dermatology-api-verify-device-and-version.md:
+    method: generated
+    evidence: declared in the artifact
+  sla/autoderm-ai-dermatology-api-sla.yml:
     method: generated
     evidence: declared in the artifact
   well-known/autoderm-ai-dermatology-api-well-known.yml:
